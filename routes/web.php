@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DoanphiController;
 use App\Http\Controllers\DoanvienController;
+use App\Http\Controllers\RenluyenController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,5 +42,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/doanvien/xoa', [DoanvienController::class, 'viewDelete']);
     Route::post('/doanvien/xoa', [DoanvienController::class, 'delete']);
 
-
+    Route::get('/renluyen', [RenluyenController::class, 'view']);
+    Route::post('/renluyen/data', [RenluyenController::class, 'getData']);
+    Route::post('/renluyen/entry', [RenluyenController::class, 'update']);
+    Route::post('/renluyen/entryBulk', [RenluyenController::class, 'updateBulk']);
 });

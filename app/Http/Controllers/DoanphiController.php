@@ -61,7 +61,6 @@ class DoanphiController extends BaseController
 
         $maDV = $input['MaDV'];
 
-
         $doanphi = Doanphi::where("MaDV", $maDV)->first();
 
         if (isset($doanphi)) {

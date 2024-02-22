@@ -1,0 +1,11 @@
+{
+    "i18n-ally.localesPaths": [
+        "public/lang",
+        "resources/lang",
+        "public/plugins/ckeditor/lang",
+        "public/plugins/datepicker/locales",
+        "public/plugins/select2/i18n",
+        "public/plugins/ckeditor/plugins/a11yhelp/dialogs/lang",
+        "public/plugins/ckeditor/plugins/specialchar/dialogs/lang"
+    ]
+}

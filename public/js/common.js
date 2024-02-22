@@ -4,39 +4,45 @@ $(function () {
     App.Site.init();
 });
 // Site
-App.Site = function () {
-
+App.Site = (function () {
     var init = function () {
-        $('select').select2();
-        $('#datepicker,#datepicker2').datepicker({
+        $("select").select2();
+        $("#datepicker,#datepicker2").datepicker({
             autoclose: false,
-            format: 'dd/mm/yyyy'
+            format: "dd/mm/yyyy",
         });
 
-        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-            checkboxClass: 'icheckbox_minimal-blue',
-            radioClass: 'iradio_minimal-blue'
+        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck(
+            {
+                checkboxClass: "icheckbox_minimal-blue",
+                radioClass: "iradio_minimal-blue",
+            }
+        );
+
+        $(
+            'input[type="checkbox"].minimal-blue, input[type="radio"].minimal-blue'
+        ).iCheck({
+            checkboxClass: "icheckbox_minimal-blue",
+            radioClass: "iradio_minimal-blue",
         });
 
-        $('input[type="checkbox"].minimal-blue, input[type="radio"].minimal-blue').iCheck({
-            checkboxClass: 'icheckbox_minimal-blue',
-            radioClass: 'iradio_minimal-blue'
+        $(
+            'input[type="checkbox"].flat-red, input[type="radio"].flat-red'
+        ).iCheck({
+            checkboxClass: "icheckbox_flat-green",
+            radioClass: "iradio_flat-green",
         });
 
-        $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-            checkboxClass: 'icheckbox_flat-green',
-            radioClass: 'iradio_flat-green'
-        });
-
-        $('[data-toggle="tooltip"], [data-toggle="offcanvas"], [data-toggle="modal"]').tooltip();
-
+        $(
+            '[data-toggle="tooltip"], [data-toggle="offcanvas"], [data-toggle="modal"]'
+        ).tooltip();
     };
 
     var showAjaxLoading = function () {
-        $('#ajaxLoadingBar').show();
+        $("#ajaxLoadingBar").show();
     };
     var hideAjaxLoading = function () {
-        $('#ajaxLoadingBar').hide();
+        $("#ajaxLoadingBar").hide();
     };
 
     var clickChangeSBMenu = false;
@@ -44,31 +50,38 @@ App.Site = function () {
         if (!clickChangeSBMenu) {
             clickChangeSBMenu = true;
             var sidebar;
-            if ($('body').hasClass('sidebar-collapse')) {
+            if ($("body").hasClass("sidebar-collapse")) {
                 sidebar = 1;
             } else {
                 sidebar = 0;
             }
             $.ajax({
-                url: baseurl + 'caidat/changeSidebar',
-                type: 'post',
-                dataType: 'json',
+                url: baseurl + "caidat/changeSidebar",
+                type: "post",
+                dataType: "json",
                 data: { sidebar: sidebar },
                 success: function () {
                     clickChangeSBMenu = false;
-                }
+                },
             });
         }
     };
 
     var printThongKe = function (elem) {
-
-        $('#btnPrint').removeClass('btn-success').addClass('btn-link').html('waiting...').attr('disabled', 'disabled');
+        $("#btnPrint")
+            .removeClass("btn-success")
+            .addClass("btn-link")
+            .html("waiting...")
+            .attr("disabled", "disabled");
         $(elem).printThis();
         setTimeout(function () {
-            $('#btnPrint').addClass('btn-success').removeClass('btn-link').html('<i class="fa fa-print"></i> In').removeAttr('disabled').show(200);
+            $("#btnPrint")
+                .addClass("btn-success")
+                .removeClass("btn-link")
+                .html('<i class="fa fa-print"></i> In')
+                .removeAttr("disabled")
+                .show(200);
         }, 850);
-
     };
 
     return {
@@ -76,24 +89,23 @@ App.Site = function () {
         showAjaxLoading: showAjaxLoading,
         hideAjaxLoading: hideAjaxLoading,
         changeSidebar: changeSidebar,
-        printThongKe: printThongKe
+        printThongKe: printThongKe,
     };
-}();
+})();
 
 // Tài khoản
-App.TaiKhoan = function () {
-
+App.TaiKhoan = (function () {
     var dangXuLy = false;
 
     var DangNhap = function () {
         if (dangXuLy == false) {
             dangXuLy = true;
             App.Site.showAjaxLoading();
-            var frmData = $('#frmDangNhap').serialize();
+            var frmData = $("#frmDangNhap").serialize();
             $.ajax({
-                url: baseurl + '/login',
-                type: 'post',
-                dataType: 'json',
+                url: baseurl + "/login",
+                type: "post",
+                dataType: "json",
                 data: frmData,
                 success: function (res) {
                     dangXuLy = false;
@@ -101,18 +113,24 @@ App.TaiKhoan = function () {
                     res = res.data;
                     console.log(res);
                     if (res.status) {
-                        $('.login-box-body').slideUp(100);
-                        $('.login-box-body').html('<div class="text-center text-success">' + res.message + '</div>').slideDown(100);
+                        $(".login-box-body").slideUp(100);
+                        $(".login-box-body")
+                            .html(
+                                '<div class="text-center text-success">' +
+                                    res.message +
+                                    "</div>"
+                            )
+                            .slideDown(100);
                         setTimeout(function () {
                             window.location.href = baseurl;
                         }, 1200);
                     } else {
-                        $('#errDangNhap').html(res.message).slideDown();
+                        $("#errDangNhap").html(res.message).slideDown();
                         setTimeout(function () {
-                            $('#errDangNhap').slideUp();
+                            $("#errDangNhap").slideUp();
                         }, 3000);
                     }
-                }
+                },
             });
         }
     };
@@ -121,31 +139,39 @@ App.TaiKhoan = function () {
         if (dangXuLy == false) {
             App.Site.showAjaxLoading();
             dangXuLy = true;
-            var frmData = $('#frmThemTK').serialize();
+            var frmData = $("#frmThemTK").serialize();
 
             $.ajax({
-                url: baseurl + 'taikhoan/xulyThemTK',
-                type: 'POST',
+                url: baseurl + "taikhoan/xulyThemTK",
+                type: "POST",
                 data: frmData,
-                dataType: 'json',
+                dataType: "json",
                 success: function (res) {
                     App.Site.hideAjaxLoading();
                     dangXuLy = false;
                     if (res.status == false) {
-                        $('#errThemTK').removeClass('text-success').addClass('text-danger').html(res.message).slideDown(200);
+                        $("#errThemTK")
+                            .removeClass("text-success")
+                            .addClass("text-danger")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
-                            $('#errThemTK').slideUp(200);
+                            $("#errThemTK").slideUp(200);
                         }, 3000);
                     } else {
-                        $('#frmDangNhap').slideUp(200);
-                        $('#errThemTK').removeClass('text-danger').addClass('text-success').html(res.message).slideDown(200);
+                        $("#frmDangNhap").slideUp(200);
+                        $("#errThemTK")
+                            .removeClass("text-danger")
+                            .addClass("text-success")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
                             location.reload();
                         }, 700);
                     }
-                }
+                },
             });
         }
     };
@@ -154,30 +180,38 @@ App.TaiKhoan = function () {
         if (dangXuLy == false) {
             App.Site.showAjaxLoading();
             dangXuLy = true;
-            var frmData = $('#frmDoiMK').serialize();
+            var frmData = $("#frmDoiMK").serialize();
 
             $.ajax({
-                url: baseurl + 'taikhoan/xulyDoiMK',
-                type: 'POST',
+                url: baseurl + "taikhoan/xulyDoiMK",
+                type: "POST",
                 data: frmData,
-                dataType: 'json',
+                dataType: "json",
                 success: function (res) {
                     App.Site.hideAjaxLoading();
                     dangXuLy = false;
                     if (res.status == false) {
-                        $('#errDoiMK').removeClass('text-success').addClass('text-danger').html(res.message).slideDown(200);
+                        $("#errDoiMK")
+                            .removeClass("text-success")
+                            .addClass("text-danger")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
-                            $('#errDoiMK').slideUp(200);
+                            $("#errDoiMK").slideUp(200);
                         }, 3000);
                     } else {
-                        $('#errDoiMK').removeClass('text-danger').addClass('text-success').html(res.message).slideDown(200);
+                        $("#errDoiMK")
+                            .removeClass("text-danger")
+                            .addClass("text-success")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
                             window.location.href = baseurl;
                         }, 700);
                     }
-                }
+                },
             });
         }
     };
@@ -186,30 +220,38 @@ App.TaiKhoan = function () {
         if (dangXuLy == false) {
             App.Site.showAjaxLoading();
             dangXuLy = true;
-            var frmData = $('#frmSuaTK').serialize();
+            var frmData = $("#frmSuaTK").serialize();
 
             $.ajax({
-                url: baseurl + 'taikhoan/xulySuaTK',
-                type: 'POST',
+                url: baseurl + "taikhoan/xulySuaTK",
+                type: "POST",
                 data: frmData,
-                dataType: 'json',
+                dataType: "json",
                 success: function (res) {
                     App.Site.hideAjaxLoading();
                     dangXuLy = false;
                     if (res.status == false) {
-                        $('#errSuaTK').removeClass('text-success').addClass('text-danger').html(res.message).slideDown(200);
+                        $("#errSuaTK")
+                            .removeClass("text-success")
+                            .addClass("text-danger")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
-                            $('#errSuaTK').slideUp(200);
+                            $("#errSuaTK").slideUp(200);
                         }, 3000);
                     } else {
-                        $('#errSuaTK').removeClass('text-danger').addClass('text-success').html(res.message).slideDown(200);
+                        $("#errSuaTK")
+                            .removeClass("text-danger")
+                            .addClass("text-success")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
-                            window.location.href = baseurl + 'taikhoan';
+                            window.location.href = baseurl + "taikhoan";
                         }, 700);
                     }
-                }
+                },
             });
         }
     };
@@ -220,27 +262,35 @@ App.TaiKhoan = function () {
             dangXuLy = true;
 
             $.ajax({
-                url: baseurl + 'taikhoan/xulyXoaTK',
-                type: 'POST',
+                url: baseurl + "taikhoan/xulyXoaTK",
+                type: "POST",
                 data: { TENDANGNHAP: tdn },
-                dataType: 'json',
+                dataType: "json",
                 success: function (res) {
                     App.Site.hideAjaxLoading();
                     dangXuLy = false;
                     if (res.status == false) {
-                        $('#errXoaTK').removeClass('text-success').addClass('text-danger').html(res.message).slideDown(200);
+                        $("#errXoaTK")
+                            .removeClass("text-success")
+                            .addClass("text-danger")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
-                            $('#errXoaTK').slideUp(200);
+                            $("#errXoaTK").slideUp(200);
                         }, 3000);
                     } else {
-                        $('#errXoaTK').removeClass('text-danger').addClass('text-success').html(res.message).slideDown(200);
+                        $("#errXoaTK")
+                            .removeClass("text-danger")
+                            .addClass("text-success")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
-                            window.location.href = baseurl + 'taikhoan';
+                            window.location.href = baseurl + "taikhoan";
                         }, 700);
                     }
-                }
+                },
             });
         }
     };
@@ -250,43 +300,50 @@ App.TaiKhoan = function () {
         DangNhap: DangNhap,
         DoiMK: DoiMK,
         SuaTK: SuaTK,
-        XoaTK: XoaTK
+        XoaTK: XoaTK,
     };
-}();
+})();
 
 // Đoàn cơ sở
-App.DoanCS = function () {
-
+App.DoanCS = (function () {
     var dangXuLy = false;
 
     var ThemDCS = function () {
         if (dangXuLy == false) {
             App.Site.showAjaxLoading();
             dangXuLy = true;
-            var frmData = $('#frmThemDCS').serialize();
+            var frmData = $("#frmThemDCS").serialize();
 
             $.ajax({
-                url: baseurl + 'doancs/xulyThemDCS',
-                type: 'POST',
+                url: baseurl + "doancs/xulyThemDCS",
+                type: "POST",
                 data: frmData,
-                dataType: 'json',
+                dataType: "json",
                 success: function (res) {
                     App.Site.hideAjaxLoading();
                     dangXuLy = false;
                     if (res.status == false) {
-                        $('#errThemDCS').removeClass('text-success').addClass('text-danger').html(res.message).slideDown(200);
+                        $("#errThemDCS")
+                            .removeClass("text-success")
+                            .addClass("text-danger")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
-                            $('#errThemDCS').slideUp(200);
+                            $("#errThemDCS").slideUp(200);
                         }, 3000);
                     } else {
-                        $('#errThemDCS').removeClass('text-danger').addClass('text-success').html(res.message).slideDown(200);
+                        $("#errThemDCS")
+                            .removeClass("text-danger")
+                            .addClass("text-success")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
                             location.reload();
                         }, 700);
                     }
-                }
+                },
             });
         }
     };
@@ -295,30 +352,38 @@ App.DoanCS = function () {
         if (dangXuLy == false) {
             App.Site.showAjaxLoading();
             dangXuLy = true;
-            var frmData = $('#frmSuaDCS').serialize();
+            var frmData = $("#frmSuaDCS").serialize();
 
             $.ajax({
-                url: baseurl + 'doancs/xulySuaDCS',
-                type: 'POST',
+                url: baseurl + "doancs/xulySuaDCS",
+                type: "POST",
                 data: frmData,
-                dataType: 'json',
+                dataType: "json",
                 success: function (res) {
                     App.Site.hideAjaxLoading();
                     dangXuLy = false;
                     if (res.status == false) {
-                        $('#errSuaDCS').removeClass('text-success').addClass('text-danger').html(res.message).slideDown(200);
+                        $("#errSuaDCS")
+                            .removeClass("text-success")
+                            .addClass("text-danger")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
-                            $('#errSuaDCS').slideUp(200);
+                            $("#errSuaDCS").slideUp(200);
                         }, 3000);
                     } else {
-                        $('#errSuaDCS').removeClass('text-danger').addClass('text-success').html(res.message).slideDown(200);
+                        $("#errSuaDCS")
+                            .removeClass("text-danger")
+                            .addClass("text-success")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
-                            window.location.href = baseurl + 'doancs';
+                            window.location.href = baseurl + "doancs";
                         }, 700);
                     }
-                }
+                },
             });
         }
     };
@@ -329,27 +394,35 @@ App.DoanCS = function () {
             dangXuLy = true;
 
             $.ajax({
-                url: baseurl + 'doancs/xulyXoaDCS',
-                type: 'POST',
+                url: baseurl + "doancs/xulyXoaDCS",
+                type: "POST",
                 data: { MADCS: maDCS },
-                dataType: 'json',
+                dataType: "json",
                 success: function (res) {
                     App.Site.hideAjaxLoading();
                     dangXuLy = false;
                     if (res.status == false) {
-                        $('#errXoaDCS').removeClass('text-success').addClass('text-danger').html(res.message).slideDown(200);
+                        $("#errXoaDCS")
+                            .removeClass("text-success")
+                            .addClass("text-danger")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
-                            $('#errXoaDCS').slideUp(200);
+                            $("#errXoaDCS").slideUp(200);
                         }, 3000);
                     } else {
-                        $('#errXoaDCS').removeClass('text-danger').addClass('text-success').html(res.message).slideDown(200);
+                        $("#errXoaDCS")
+                            .removeClass("text-danger")
+                            .addClass("text-success")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
-                            window.location.href = baseurl + 'doancs';
+                            window.location.href = baseurl + "doancs";
                         }, 700);
                     }
-                }
+                },
             });
         }
     };
@@ -357,43 +430,50 @@ App.DoanCS = function () {
     return {
         ThemDCS: ThemDCS,
         SuaDCS: SuaDCS,
-        XoaDCS: XoaDCS
+        XoaDCS: XoaDCS,
     };
-}();
+})();
 
 // Chi đoàn
-App.ChiDoan = function () {
-
+App.ChiDoan = (function () {
     var dangXuLy = false;
 
     var ThemCD = function () {
         if (dangXuLy == false) {
             App.Site.showAjaxLoading();
             dangXuLy = true;
-            var frmData = $('#frmThemCD').serialize();
+            var frmData = $("#frmThemCD").serialize();
 
             $.ajax({
-                url: baseurl + 'chidoan/xulyThemCD',
-                type: 'POST',
+                url: baseurl + "chidoan/xulyThemCD",
+                type: "POST",
                 data: frmData,
-                dataType: 'json',
+                dataType: "json",
                 success: function (res) {
                     App.Site.hideAjaxLoading();
                     dangXuLy = false;
                     if (res.status == false) {
-                        $('#errThemCD').removeClass('text-success').addClass('text-danger').html(res.message).slideDown(200);
+                        $("#errThemCD")
+                            .removeClass("text-success")
+                            .addClass("text-danger")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
-                            $('#errThemCD').slideUp(200);
+                            $("#errThemCD").slideUp(200);
                         }, 3000);
                     } else {
-                        $('#errThemCD').removeClass('text-danger').addClass('text-success').html(res.message).slideDown(200);
+                        $("#errThemCD")
+                            .removeClass("text-danger")
+                            .addClass("text-success")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
                             location.reload();
                         }, 700);
                     }
-                }
+                },
             });
         }
     };
@@ -402,30 +482,38 @@ App.ChiDoan = function () {
         if (dangXuLy == false) {
             App.Site.showAjaxLoading();
             dangXuLy = true;
-            var frmData = $('#frmSuaCD').serialize();
+            var frmData = $("#frmSuaCD").serialize();
 
             $.ajax({
-                url: baseurl + 'chidoan/xulySuaCD',
-                type: 'POST',
+                url: baseurl + "chidoan/xulySuaCD",
+                type: "POST",
                 data: frmData,
-                dataType: 'json',
+                dataType: "json",
                 success: function (res) {
                     App.Site.hideAjaxLoading();
                     dangXuLy = false;
                     if (res.status == false) {
-                        $('#errSuaCD').removeClass('text-success').addClass('text-danger').html(res.message).slideDown(200);
+                        $("#errSuaCD")
+                            .removeClass("text-success")
+                            .addClass("text-danger")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
-                            $('#errSuaCD').slideUp(200);
+                            $("#errSuaCD").slideUp(200);
                         }, 3000);
                     } else {
-                        $('#errSuaCD').removeClass('text-danger').addClass('text-success').html(res.message).slideDown(200);
+                        $("#errSuaCD")
+                            .removeClass("text-danger")
+                            .addClass("text-success")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
-                            window.location.href = baseurl + 'chidoan';
+                            window.location.href = baseurl + "chidoan";
                         }, 700);
                     }
-                }
+                },
             });
         }
     };
@@ -436,27 +524,35 @@ App.ChiDoan = function () {
             dangXuLy = true;
 
             $.ajax({
-                url: baseurl + 'chidoan/xulyXoaCD',
-                type: 'POST',
+                url: baseurl + "chidoan/xulyXoaCD",
+                type: "POST",
                 data: { MACD: maCD },
-                dataType: 'json',
+                dataType: "json",
                 success: function (res) {
                     App.Site.hideAjaxLoading();
                     dangXuLy = false;
                     if (res.status == false) {
-                        $('#errXoaCD').removeClass('text-success').addClass('text-danger').html(res.message).slideDown(200);
+                        $("#errXoaCD")
+                            .removeClass("text-success")
+                            .addClass("text-danger")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
-                            $('#errXoaCD').slideUp(200);
+                            $("#errXoaCD").slideUp(200);
                         }, 3000);
                     } else {
-                        $('#errXoaCD').removeClass('text-danger').addClass('text-success').html(res.message).slideDown(200);
+                        $("#errXoaCD")
+                            .removeClass("text-danger")
+                            .addClass("text-success")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
-                            window.location.href = baseurl + 'chidoan';
+                            window.location.href = baseurl + "chidoan";
                         }, 700);
                     }
-                }
+                },
             });
         }
     };
@@ -464,47 +560,54 @@ App.ChiDoan = function () {
     return {
         ThemCD: ThemCD,
         SuaCD: SuaCD,
-        XoaCD: XoaCD
+        XoaCD: XoaCD,
     };
-}();
+})();
 
 // Đoàn viên
-App.DoanVien = function () {
-
+App.DoanVien = (function () {
     var dangXuLy = false;
 
     var ThemDV = function () {
         if (dangXuLy == false) {
             App.Site.showAjaxLoading();
             dangXuLy = true;
-            var frmData = $('#frmThemDV').serialize();
+            var frmData = $("#frmThemDV").serialize();
 
             App.Site.hideAjaxLoading();
 
             $.ajax({
-                url: baseurl + '/doanvien/them',
-                type: 'POST',
+                url: baseurl + "/doanvien/them",
+                type: "POST",
                 data: frmData,
-                dataType: 'json',
+                dataType: "json",
                 success: function (res) {
                     App.Site.hideAjaxLoading();
                     res = res.data;
                     dangXuLy = false;
                     // console.log(res);
                     if (res.status == false) {
-                        $('#errThemDV').removeClass('text-success').addClass('text-danger').html(res.message).slideDown(200);
+                        $("#errThemDV")
+                            .removeClass("text-success")
+                            .addClass("text-danger")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
-                            $('#errThemDV').slideUp(200);
+                            $("#errThemDV").slideUp(200);
                         }, 3000);
                     } else {
-                        $('#errThemDV').removeClass('text-danger').addClass('text-success').html(res.message).slideDown(200);
+                        $("#errThemDV")
+                            .removeClass("text-danger")
+                            .addClass("text-success")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
                             location.reload();
                         }, 700);
                     }
-                }
+                },
             });
         }
     };
@@ -513,30 +616,38 @@ App.DoanVien = function () {
         if (dangXuLy == false) {
             App.Site.showAjaxLoading();
             dangXuLy = true;
-            var frmData = $('#frmSuaDV').serialize();
+            var frmData = $("#frmSuaDV").serialize();
 
             $.ajax({
-                url: baseurl + '/doanvien/sua',
-                type: 'POST',
+                url: baseurl + "/doanvien/sua",
+                type: "POST",
                 data: frmData,
-                dataType: 'json',
+                dataType: "json",
                 success: function (res) {
                     App.Site.hideAjaxLoading();
                     dangXuLy = false;
                     if (res.status == false) {
-                        $('#errSuaDV').removeClass('text-success').addClass('text-danger').html(res.message).slideDown(200);
+                        $("#errSuaDV")
+                            .removeClass("text-success")
+                            .addClass("text-danger")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
-                            $('#errSuaDV').slideUp(200);
+                            $("#errSuaDV").slideUp(200);
                         }, 3000);
                     } else {
-                        $('#errSuaDV').removeClass('text-danger').addClass('text-success').html(res.message).slideDown(200);
+                        $("#errSuaDV")
+                            .removeClass("text-danger")
+                            .addClass("text-success")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
-                            window.location.href = baseurl + 'doanvien';
+                            window.location.href = baseurl + "doanvien";
                         }, 700);
                     }
-                }
+                },
             });
         }
     };
@@ -546,28 +657,36 @@ App.DoanVien = function () {
             App.Site.showAjaxLoading();
             dangXuLy = true;
             $.ajax({
-                url: baseurl + '/doanvien/xoa',
-                type: 'POST',
+                url: baseurl + "/doanvien/xoa",
+                type: "POST",
                 data: { MaDV: maDV },
-                dataType: 'json',
+                dataType: "json",
                 success: function (res) {
                     res = res.data;
                     App.Site.hideAjaxLoading();
                     dangXuLy = false;
                     if (res.status == false) {
-                        $('#errXoaDV').removeClass('text-success').addClass('text-danger').html(res.message).slideDown(200);
+                        $("#errXoaDV")
+                            .removeClass("text-success")
+                            .addClass("text-danger")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
-                            $('#errXoaDV').slideUp(200);
+                            $("#errXoaDV").slideUp(200);
                         }, 3000);
                     } else {
-                        $('#errXoaDV').removeClass('text-danger').addClass('text-success').html(res.message).slideDown(200);
+                        $("#errXoaDV")
+                            .removeClass("text-danger")
+                            .addClass("text-success")
+                            .html(res.message)
+                            .slideDown(200);
 
                         setTimeout(function () {
-                            window.location.href = baseurl + '/doanvien';
+                            window.location.href = baseurl + "/doanvien";
                         }, 700);
                     }
-                }
+                },
             });
         }
     };
@@ -575,20 +694,19 @@ App.DoanVien = function () {
     return {
         ThemDV: ThemDV,
         SuaDV: SuaDV,
-        XoaDV: XoaDV
+        XoaDV: XoaDV,
     };
-}();
+})();
 
-App.DoanPhi = function () {
-
+App.DoanPhi = (function () {
     var dangXuLy = false;
 
     var XemDoanPhi = function () {
         if (dangXuLy == false) {
-            $('#tblDoanPhi').html('<div id="ajaxLoadingBar"></div>');
+            $("#tblDoanPhi").html('<div id="ajaxLoadingBar"></div>');
             App.Site.showAjaxLoading();
             dangXuLy = true;
-            var maCD = $('#selectChiDoan').val();
+            var maCD = $("#selectChiDoan").val();
             console.log(maCD);
 
             // $.ajaxSetup({
@@ -598,154 +716,234 @@ App.DoanPhi = function () {
             // });
 
             $.ajax({
-                url: baseurl + '/doanphi/data',
-                type: 'POST',
+                url: baseurl + "/doanphi/data",
+                type: "POST",
                 data: { MACD: maCD },
-                dataType: 'json',
+                dataType: "json",
                 success: function (html) {
                     // why the fuck did server return html??? is it server's responsibility ???
                     console.log(html);
                     App.Site.hideAjaxLoading();
                     dangXuLy = false;
 
-                    $('#tblDoanPhi').html(html.data).slideDown(200);
+                    $("#tblDoanPhi").html(html.data).slideDown(200);
 
                     App.Site.init();
                 },
-                timeout: 3000
+                timeout: 3000,
             });
         }
     };
 
     var CapNhat = function (maDV) {
         if (dangXuLy == false) {
-            $('#btnLuu_' + maDV).removeClass('btn-warning').addClass('btn-link').html('waiting...').attr('disabled', 'disabled');
+            $("#btnLuu_" + maDV)
+                .removeClass("btn-warning")
+                .addClass("btn-link")
+                .html("waiting...")
+                .attr("disabled", "disabled");
             dangXuLy = true;
             var val = [];
             let data = { MaDV: maDV };
 
-
             $('input[name="dp_' + maDV + '[]"]').each(function () {
-                if ((this).checked) {
-                    data['HK' + $(this).val()] = 1;
+                if (this.checked) {
+                    data["HK" + $(this).val()] = 1;
                     // val.push($(this).val());
                 } else {
-                    data['HK' + $(this).val()] = 0;
+                    data["HK" + $(this).val()] = 0;
                 }
             });
 
             $.ajax({
-                url: baseurl + '/doanphi/entry',
-                type: 'POST',
+                url: baseurl + "/doanphi/entry",
+                type: "POST",
                 // data: { MADV: maDV, DOANPHI: val },
                 data: data,
-                dataType: 'json',
+                dataType: "json",
                 success: function (res) {
                     console.log(res);
                     dangXuLy = false;
-                    $('#btnLuu_' + maDV).addClass('text-success').html('<i class="fa fa-check"></i> Xong').fadeIn(200);
+                    $("#btnLuu_" + maDV)
+                        .addClass("text-success")
+                        .html('<i class="fa fa-check"></i> Xong')
+                        .fadeIn(200);
                     setTimeout(function () {
-                        $('#btnLuu_' + maDV).addClass('btn-warning').removeClass('btn-link').html('<i class="fa fa-save"></i> Lưu').removeAttr('disabled').show(500);
+                        $("#btnLuu_" + maDV)
+                            .addClass("btn-warning")
+                            .removeClass("btn-link")
+                            .html('<i class="fa fa-save"></i> Lưu')
+                            .removeAttr("disabled")
+                            .show(500);
                     }, 500);
-                }
+                },
             });
         }
     };
 
     return {
         XemDoanPhi: XemDoanPhi,
-        CapNhat: CapNhat
+        CapNhat: CapNhat,
     };
-}();
+})();
 
-App.RenLuyen = function () {
-
+App.RenLuyen = (function () {
     var dangXuLy = false;
 
     var XemRenLuyen = function () {
         if (dangXuLy == false) {
-            $('#tblRenLuyen').html('<div id="ajaxLoadingBar"></div>');
+            $("#tblRenLuyen").html('<div id="ajaxLoadingBar"></div>');
             App.Site.showAjaxLoading();
             dangXuLy = true;
-            var maCD = $('#selectChiDoan').val();
-            var hocky = $('#selectHocKy').val();
+            var maCD = $("#selectChiDoan").val();
+            var hocky = $("#selectHocKy").val();
 
             $.ajax({
-                url: baseurl + 'renluyen/xulyGetRenLuyenChiDoan',
-                type: 'POST',
-                data: { MACD: maCD, HOCKY: hocky },
-                dataType: 'json',
-                success: function (html) {
+                url: baseurl + "/renluyen/data",
+                type: "POST",
+                data: { MaCD: maCD, HocKy: hocky },
+                dataType: "json",
+                success: function (response) {
                     App.Site.hideAjaxLoading();
                     dangXuLy = false;
-
-                    $('#tblRenLuyen').html(html).slideDown(200);
+                    $("#tblRenLuyen").html(response.data).slideDown(200);
 
                     App.Site.init();
-                }
+                },
             });
         }
     };
 
-    var CapNhat = function (maDV, hocky) {
+    var CapNhat = function (maDV) {
         if (dangXuLy == false) {
-            $('#btnLuu_' + maDV).removeClass('btn-warning').addClass('btn-link').html('waiting...').attr('disabled', 'disabled');
+            $("#btnLuu_" + maDV)
+                .removeClass("btn-warning")
+                .addClass("btn-link")
+                .html("waiting...")
+                .attr("disabled", "disabled");
             dangXuLy = true;
-            var diem = $('input[name="diem_' + maDV + '"]').val();
-            var xeploai = $('select[name="xeploai_' + maDV + '"]').val();
+            var diem = $('input[name="Diem_' + maDV + '"]').val();
+            var xeploai = $('select[name="XepLoai_' + maDV + '"]').val();
+            var hocky = $("#selectHocKy").val();
+            var data = {
+                MaDV: maDV,
+                HocKy: `HK${hocky}`,
+                Diem: diem,
+                XepLoai: xeploai,
+            };
             $.ajax({
-                url: baseurl + 'renluyen/xulyCapNhatRenLuyen',
-                type: 'POST',
-                data: { MADV: maDV, HOCKY: hocky, DIEM: diem, XEPLOAI: xeploai },
-                dataType: 'json',
+                url: baseurl + "/renluyen/entry",
+                type: "POST",
+                data: data,
+                dataType: "json",
                 success: function (res) {
                     dangXuLy = false;
-                    $('#btnLuu_' + maDV).addClass('text-success').html('<i class="fa fa-check"></i> Xong').fadeIn(200);
+                    $("#btnLuu_" + maDV)
+                        .addClass("text-success")
+                        .html('<i class="fa fa-check"></i> Xong')
+                        .fadeIn(200);
                     setTimeout(function () {
-                        $('#btnLuu_' + maDV).addClass('btn-warning').removeClass('btn-link').html('<i class="fa fa-save"></i> Lưu').removeAttr('disabled').show(500);
+                        $("#btnLuu_" + maDV)
+                            .addClass("btn-warning")
+                            .removeClass("btn-link")
+                            .html('<i class="fa fa-save"></i> Lưu')
+                            .removeAttr("disabled")
+                            .show(500);
                     }, 500);
-                }
+                },
+                error: function (err) {},
+            });
+        }
+    };
+
+    var CapNhatAll = function () {
+        var list_maDV = $("input[id^='select_']")
+            .map(function (i, el) {
+                if (this.id != "select_all" && this.checked == true) {
+                    return this.id.split("_")[1];
+                } else return undefined;
+            })
+            .get();
+        if (dangXuLy == false) {
+            $("#btnLuu_all")
+                .removeClass("btn-warning")
+                .addClass("btn-link")
+                .html("waiting...")
+                .attr("disabled", "disabled");
+            dangXuLy = true;
+            var diem = $('input[name="Diem_all"]').val();
+            var xeploai = $('select[name="XepLoai_all"]').val();
+            var hocky = $("#selectHocKy").val();
+            var data = {
+                list_maDV: list_maDV,
+                HocKy: `HK${hocky}`,
+                Diem: diem,
+                XepLoai: xeploai,
+            };
+            console.log(data);
+            $.ajax({
+                url: baseurl + "/renluyen/entryBulk",
+                type: "POST",
+                data: data,
+                dataType: "json",
+                success: function (res) {
+                    dangXuLy = false;
+                    $("#btnLuu_all")
+                        .addClass("text-success")
+                        .html('<i class="fa fa-check"></i> Xong')
+                        .fadeIn(200);
+                    setTimeout(function () {
+                        $("#btnLuu_all")
+                            .addClass("btn-warning")
+                            .removeClass("btn-link")
+                            .html('<i class="fa fa-save"></i> Lưu')
+                            .removeAttr("disabled")
+                            .show(500);
+                    }, 500);
+                    App.RenLuyen.XemRenLuyen();
+                },
+                error: function (err) {},
             });
         }
     };
 
     return {
         XemRenLuyen: XemRenLuyen,
-        CapNhat: CapNhat
+        CapNhat: CapNhat,
+        CapNhatAll: CapNhatAll,
     };
-}();
+})();
 
-App.ThongKe = function () {
-
+App.ThongKe = (function () {
     var dangXuLy = false;
 
     var XemThongKe = function () {
         if (dangXuLy == false) {
-            $('#tblThongKe').html('<div id="ajaxLoadingBar"></div>');
+            $("#tblThongKe").html('<div id="ajaxLoadingBar"></div>');
             App.Site.showAjaxLoading();
             dangXuLy = true;
-            var loaiThongKe = $('#selectThongKe').val();
-            var maCD = $('#selectChiDoan').val();
-            var hocky = $('#selectHocKy').val();
+            var loaiThongKe = $("#selectThongKe").val();
+            var maCD = $("#selectChiDoan").val();
+            var hocky = $("#selectHocKy").val();
 
             $.ajax({
-                url: baseurl + 'thongke/xulyXemThongKe',
-                type: 'POST',
+                url: baseurl + "thongke/xulyXemThongKe",
+                type: "POST",
                 data: { LOAI: loaiThongKe, MACD: maCD, HOCKY: hocky },
-                dataType: 'json',
+                dataType: "json",
                 success: function (html) {
                     App.Site.hideAjaxLoading();
                     dangXuLy = false;
 
-                    $('#tblThongKe').html(html).slideDown(500);
+                    $("#tblThongKe").html(html).slideDown(500);
 
                     App.Site.init();
-                }
+                },
             });
         }
     };
 
     return {
-        XemThongKe: XemThongKe
+        XemThongKe: XemThongKe,
     };
-}();
+})();
