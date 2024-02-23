@@ -102,7 +102,10 @@
                                 <label>Chi đoàn</label>
                                 <select name="MaCD" class="form-control select2" style="width: 100%;">
                                     <?php foreach ($listcd as $cd): ?>
-                                    <option value="<?php echo $cd->MaCD; ?>"><?php echo $cd->TenCD; ?></option>
+                                    <option value="<?php echo $cd->MaCD; ?>" <?php if ($doanvien['MaCD'] == $cd->MaCD) {
+                                        echo 'selected';
+                                    } ?>><?php echo $cd->TenCD; ?>
+                                    </option>
                                     <?php endforeach ?>
                                 </select>
                             </div>
@@ -110,7 +113,10 @@
                                 <label>Chức vụ</label>
                                 <select name="MaChucVu" class="form-control select2" style="width: 100%;">
                                     <?php foreach ($listcv as $cv): ?>
-                                    <option value="<?php echo $cv->MaChucVu; ?>"><?php echo $cv->TenChucVu; ?></option>
+                                    <option value="<?php echo $cv->MaChucVu; ?>" <?php if ($doanvien['MaChucVu'] == $cv->MaChucVu) {
+                                        echo 'selected';
+                                    } ?>><?php echo $cv->TenChucVu; ?>
+                                    </option>
                                     <?php endforeach ?>
                                 </select>
                             </div>

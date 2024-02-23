@@ -33,7 +33,6 @@ class DoanvienController extends BaseController
         $search = isset($request->all()['search']) ? $request->all()['search'] : "";
         // is pagination needed ??
 
-        $doanvien = "doanviennn";
         if ($search == "") {
             $doanvien = Doanvien::leftJoin('chidoan', 'chidoan.MaCD', '=', 'doanvien.MaCD')->
                 leftJoin('giu', 'doanvien.MaDV', '=', 'giu.MaDV')->
@@ -41,16 +40,11 @@ class DoanvienController extends BaseController
                 select('doanvien.*', 'TenCD', 'TenChucVu')->
                 get();
         } else {
-            // $doanvien = $search;
-            // where(
-            // $search = "1";
-
-            // more technical debt. Mother forgive me
             $doanvien = Doanvien::leftJoin('chidoan', 'chidoan.MaCD', '=', 'doanvien.MaCD')->
                 leftJoin('giu', 'doanvien.MaDV', '=', 'giu.MaDV')->
                 leftJoin('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->
-                where(DB::raw("doanvien.MaDV LIKE '%" . $search . "%'"), [1])->
-                orWhere(DB::raw("CONCAT(doanvien.HoDV,' ',doanvien.TenDV) LIKE '%" . $search . "%'"), [1])->
+                where("doanvien.MaDV", "LIKE", "%" . $search . "%")->
+                orWhere(DB::raw("CONCAT(doanvien.HoDV,' ',doanvien.TenDV)"), "LIKE", "%" . $search . "%")->
                 select('doanvien.*', 'TenCD', 'TenChucVu')->
                 get();
         }
@@ -96,12 +90,6 @@ class DoanvienController extends BaseController
             $response->message = "Thêm đoàn viên thành công";
             $response->status = 1;
         }
-        // foreach ($input as $key => $value) {
-        //     $doanvien[$key] = $value;
-        // }
-
-        // $doanvien->save();
-
 
         return $this->sendResponse($response, "OK");
 
@@ -134,14 +122,12 @@ class DoanvienController extends BaseController
             $response->error = $validator->errors();
             $response->status = 0;
         } else {
-            $input['NgayVaoDoan'] = \Carbon\Carbon::parse($input['NgayVaoDoan'])->format('Y-m-d');
-            $input['NgaySinh'] = \Carbon\Carbon::parse($input['NgayVaoDoan'])->format('Y-m-d');
+            $input['NgayVaoDoan'] = \Carbon\Carbon::createFromFormat('d/m/Y', $input['NgayVaoDoan'])->format('Y-m-d');
+            $input['NgaySinh'] = \Carbon\Carbon::createFromFormat('d/m/Y', $input['NgaySinh'])->format('Y-m-d');
             $chucvu = ['MaDV' => $input['MaDV'], 'MaChucVu' => $input['MaChucVu']];
             unset($input['MaChucVu']);
 
             $doanvien = Doanvien::where('MaDV', $input['MaDV']);
-
-
 
             $doanvien->update($input);
 
@@ -166,13 +152,13 @@ class DoanvienController extends BaseController
         $listCV = Chucvu::all();
 
 
-        $doanvien = Doanvien::where("MaDV", '=', $maDV)->first();
+        $doanvien = Doanvien::where("doanvien.MaDV", "=", $maDV)->
+            leftJoin('giu', 'doanvien.MaDV', '=', 'giu.MaDV')->
+            select('doanvien.*', 'MaCD', 'MaChucVu')->
+            first();
 
         if (isset($doanvien)) {
-
-
             return view('doanvien-sua', ['listcd' => $listCD, 'listcv' => $listCV, 'doanvien' => json_decode(json_encode($doanvien), true)]);
-
         } else {
             abort(404);
         }
