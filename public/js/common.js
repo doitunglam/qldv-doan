@@ -781,9 +781,50 @@ App.DoanPhi = (function () {
         }
     };
 
+    var LuuLich = function () {
+        console.log("Luu Lich");
+        if (dangXuLy == false) {
+            $("#btnLuuLich")
+                .removeClass("btn-warning")
+                .addClass("btn-link")
+                .html("waiting...")
+                .attr("disabled", "disabled");
+            dangXuLy = true;
+            var thoigian = $('input[name="thoigian"]').val();
+            var hocky = $('input[name="hocky"]').val();
+            var chidoan = $("#selectChiDoan").val();
+
+            let data = { ThoiDiem: thoigian, HocKy: hocky, MaCD: chidoan };
+            console.log(data);
+            $.ajax({
+                url: baseurl + "/lich",
+                type: "POST",
+                data: data,
+                dataType: "json",
+                success: function (res) {
+                    console.log(res);
+                    dangXuLy = false;
+                    $("#btnLuuLich")
+                        .addClass("text-success")
+                        .html('<i class="fa fa-check"></i> Xong')
+                        .fadeIn(200);
+                    setTimeout(function () {
+                        $("#btnLuuLich")
+                            .addClass("btn-warning")
+                            .removeClass("btn-link")
+                            .html('<i class="fa fa-save"></i> Lưu')
+                            .removeAttr("disabled")
+                            .show(500);
+                    }, 500);
+                },
+            });
+        }
+    };
+
     return {
         XemDoanPhi: XemDoanPhi,
         CapNhat: CapNhat,
+        LuuLich: LuuLich,
     };
 })();
 
