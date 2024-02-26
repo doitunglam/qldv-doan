@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2024 at 09:41 AM
+-- Generation Time: Feb 26, 2024 at 09:33 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -91,7 +91,19 @@ CREATE TABLE `doanphi` (
 
 INSERT INTO `doanphi` (`MaDV`, `HK1`, `HK2`, `HK3`, `HK4`, `HK5`, `HK6`, `HK7`, `HK8`) VALUES
 ('61134111', 1, 1, 1, 1, 1, 1, 1, 1),
-('61136118', 1, 0, 0, 0, 0, 0, 0, 0);
+('61134112', 0, 1, 0, 0, 0, 0, 0, 0),
+('61136110', 0, 1, 0, 0, 0, 0, 0, 0),
+('61136111', 0, 1, 0, 0, 0, 0, 0, 0),
+('61136112', 0, 1, 0, 0, 0, 0, 0, 0),
+('61136113', 0, 1, 0, 0, 0, 0, 0, 0),
+('61136114', 0, 1, 0, 0, 0, 0, 0, 0),
+('61136115', 0, 1, 0, 0, 0, 0, 0, 0),
+('61136116', 0, 1, 0, 0, 0, 0, 0, 0),
+('61136117', 1, 1, 0, 0, 0, 0, 0, 0),
+('61136118', 1, 1, 0, 0, 0, 0, 0, 0),
+('61136119', 0, 1, 0, 0, 0, 0, 0, 0),
+('61136401', 0, 1, 0, 0, 0, 0, 0, 0),
+('61136481', 0, 1, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -117,6 +129,8 @@ CREATE TABLE `doanvien` (
 --
 
 INSERT INTO `doanvien` (`MaDV`, `HoDV`, `TenDV`, `GioiTinh`, `NgaySinh`, `Email`, `SDT`, `QueQuan`, `MaCD`, `NgayVaoDoan`) VALUES
+('123213', '1', '1', 1, '2024-02-16', 'doitunglam1@gmail.com', '1', '1', '1', '2024-02-21'),
+('20203443', 'Do', 'Lam', 1, '2024-02-01', 'dolam@gmail.com', '0993328492', 'HN', '4', '2024-02-13'),
 ('61134111', 'Phạm Hữu', 'Danh', 1, '2001-11-02', 'huynguyen7111@gmail.com', '0775409509', 'Phú Yên', '1', '2020-06-20'),
 ('61134112', 'Huỳnh Quốc', 'Đạt', 1, '2001-01-02', 'huynguyen7111@gmail.com', '0775409509', 'Khánh Hòa', '1', '2020-06-20'),
 ('61136110', 'Huỳnh Diệp', 'Phụng', 0, '2001-06-05', 'huynguyen7111@gmail.com', '0775409509', 'Khánh Hòa', '1', '2020-06-20'),
@@ -179,6 +193,8 @@ CREATE TABLE `giu` (
 --
 
 INSERT INTO `giu` (`MaDV`, `MaChucVu`, `NgayNhanChuc`, `NgayHetNhiemKy`) VALUES
+('123213', '1', '2024-02-23', '2024-02-23'),
+('20203443', '3', '2024-02-23', '2024-02-23'),
 ('61134111', '2', '2021-06-19', '2024-06-19'),
 ('61134112', '3', '2021-06-19', '2024-06-19'),
 ('61136110', '4', '2021-06-19', '2024-06-19'),
@@ -245,6 +261,27 @@ INSERT INTO `khoa` (`MaKhoa`, `TenKhoa`, `SDT`) VALUES
 ('CNTT', 'Công Nghệ Thông Tin', '0121243132'),
 ('DL', 'Du Lịch', '0134546666'),
 ('KT', 'Kinh Tế', '0123454777');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lich`
+--
+
+CREATE TABLE `lich` (
+  `MaLich` int(11) NOT NULL,
+  `MaCD` varchar(10) NOT NULL,
+  `HocKy` varchar(4) NOT NULL,
+  `ThoiDiem` date NOT NULL,
+  `TrangThai` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `lich`
+--
+
+INSERT INTO `lich` (`MaLich`, `MaCD`, `HocKy`, `ThoiDiem`, `TrangThai`) VALUES
+(3, '1', 'HK2', '2024-02-26', NULL);
 
 -- --------------------------------------------------------
 
@@ -358,8 +395,20 @@ CREATE TABLE `renluyen` (
 --
 
 INSERT INTO `renluyen` (`MaDV`, `HocKy`, `Diem`, `XepLoai`) VALUES
-('61134111', 'HK1', 100, 'Khá'),
-('61134112', 'HK1', 20, 'Trung bình');
+('61134111', 'HK1', 10, 'Trung bình'),
+('61134112', 'HK1', 10, 'Trung bình'),
+('61136110', 'HK1', 10, 'Trung bình'),
+('61136111', 'HK1', 10, 'Trung bình'),
+('61136112', 'HK1', 10, 'Trung bình'),
+('61136113', 'HK1', 10, 'Trung bình'),
+('61136114', 'HK1', 10, 'Trung bình'),
+('61136115', 'HK1', 10, 'Trung bình'),
+('61136116', 'HK1', 10, 'Trung bình'),
+('61136117', 'HK1', 10, 'Trung bình'),
+('61136118', 'HK1', 10, 'Trung bình'),
+('61136119', 'HK1', 10, 'Trung bình'),
+('61136401', 'HK1', 10, 'Trung bình'),
+('61136481', 'HK1', 10, 'Trung bình');
 
 -- --------------------------------------------------------
 
@@ -484,6 +533,14 @@ ALTER TABLE `khoa`
   ADD PRIMARY KEY (`MaKhoa`);
 
 --
+-- Indexes for table `lich`
+--
+ALTER TABLE `lich`
+  ADD PRIMARY KEY (`MaLich`),
+  ADD KEY `MaCD` (`MaCD`),
+  ADD KEY `HocKy` (`HocKy`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -539,6 +596,12 @@ ALTER TABLE `taikhoan`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `lich`
+--
+ALTER TABLE `lich`
+  MODIFY `MaLich` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `migrations`
