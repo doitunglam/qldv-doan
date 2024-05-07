@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2024 at 09:33 AM
+-- Generation Time: May 07, 2024 at 12:54 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -90,20 +90,10 @@ CREATE TABLE `doanphi` (
 --
 
 INSERT INTO `doanphi` (`MaDV`, `HK1`, `HK2`, `HK3`, `HK4`, `HK5`, `HK6`, `HK7`, `HK8`) VALUES
-('61134111', 1, 1, 1, 1, 1, 1, 1, 1),
-('61134112', 0, 1, 0, 0, 0, 0, 0, 0),
-('61136110', 0, 1, 0, 0, 0, 0, 0, 0),
-('61136111', 0, 1, 0, 0, 0, 0, 0, 0),
-('61136112', 0, 1, 0, 0, 0, 0, 0, 0),
-('61136113', 0, 1, 0, 0, 0, 0, 0, 0),
-('61136114', 0, 1, 0, 0, 0, 0, 0, 0),
-('61136115', 0, 1, 0, 0, 0, 0, 0, 0),
-('61136116', 0, 1, 0, 0, 0, 0, 0, 0),
-('61136117', 1, 1, 0, 0, 0, 0, 0, 0),
-('61136118', 1, 1, 0, 0, 0, 0, 0, 0),
-('61136119', 0, 1, 0, 0, 0, 0, 0, 0),
-('61136401', 0, 1, 0, 0, 0, 0, 0, 0),
-('61136481', 0, 1, 0, 0, 0, 0, 0, 0);
+('61112345', 0, 1, 0, 1, 1, 0, 0, 0),
+('61112346', 1, 0, 1, 0, 0, 1, 0, 0),
+('61164235', 0, 0, 0, 0, 0, 0, 0, 0),
+('61164236', 1, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -129,35 +119,22 @@ CREATE TABLE `doanvien` (
 --
 
 INSERT INTO `doanvien` (`MaDV`, `HoDV`, `TenDV`, `GioiTinh`, `NgaySinh`, `Email`, `SDT`, `QueQuan`, `MaCD`, `NgayVaoDoan`) VALUES
-('123213', '1', '1', 1, '2024-02-16', 'doitunglam1@gmail.com', '1', '1', '1', '2024-02-21'),
-('20203443', 'Do', 'Lam', 1, '2024-02-01', 'dolam@gmail.com', '0993328492', 'HN', '4', '2024-02-13'),
-('61134111', 'Phạm Hữu', 'Danh', 1, '2001-11-02', 'huynguyen7111@gmail.com', '0775409509', 'Phú Yên', '1', '2020-06-20'),
-('61134112', 'Huỳnh Quốc', 'Đạt', 1, '2001-01-02', 'huynguyen7111@gmail.com', '0775409509', 'Khánh Hòa', '1', '2020-06-20'),
-('61136110', 'Huỳnh Diệp', 'Phụng', 0, '2001-06-05', 'huynguyen7111@gmail.com', '0775409509', 'Khánh Hòa', '1', '2020-06-20'),
-('61136111', 'Ngọc', 'Huy', 1, '2001-06-12', 'huynguyen71101@gmail.com', '0771350000', 'Phú Yên', '1', '2020-06-12'),
-('61136112', 'Lê Thị', 'Hiền', 0, '2001-06-28', 'huynguyen7111@gmail.com', '0775409509', 'Khánh Hòa', '1', '2020-06-20'),
-('61136113', 'Vũ Ngọc', 'An', 1, '2001-11-12', 'huynguyen71101@gmail.com', '0771350000', 'Phú Yên', '1', '2020-06-12'),
-('61136114', 'Huỳnh Diệp', 'Phụng', 0, '2001-06-05', 'huynguyen7111@gmail.com', '0775409509', 'Khánh Hòa', '1', '2020-06-20'),
-('61136115', 'Phạm Hữu', 'Danh', 1, '2001-11-02', 'huynguyen7111@gmail.com', '0775409509', 'Phú Yên', '1', '2020-06-20'),
-('61136116', 'Huỳnh Quốc', 'Đạt', 1, '2001-01-02', 'huynguyen7111@gmail.com', '0775409509', 'Khánh Hòa', '1', '2020-06-20'),
-('61136117', 'Ngọc', 'Huy', 1, '2001-06-12', 'huynguyen71101@gmail.com', '0771350000', 'Phú Yên', '1', '2020-06-12'),
-('61136118', 'Lê Thị', 'Hiền', 0, '2001-06-28', 'huynguyen7111@gmail.com', '0775409509', 'Khánh Hòa', '1', '2020-06-20'),
-('61136119', 'Vũ Ngọc', 'An', 1, '2001-11-12', 'huynguyen71101@gmail.com', '0771350000', 'Phú Yên', '1', '2020-06-12'),
-('61136401', 'Ngọc', 'Huy', 0, '2022-06-12', 'huynguyen71101@gmail.com', '0771350000', 'Phú Yên', '1', '2022-06-12'),
-('61136412', 'Nguyễn Văn', 'Minh', 1, '2001-06-28', 'huynguyen1101@gmail.com', '0775409509', 'Phú Yên', '5', '2023-06-05'),
-('61136481', 'Nguyễn Văn', 'Hùng', 1, '2023-06-28', 'huynguyen7111@gmail.com', '0775409509', 'Phú Yên', '1', '2023-06-20'),
-('71136111', 'Triệu Nam', 'Dương', 1, '2001-06-12', 'huynguyen71101@gmail.com', '0771350000', 'Phú Yên', '2', '2020-06-12'),
-('71136112', 'Dương Thanh ', 'Dung', 0, '2001-06-28', 'huynguyen7111@gmail.com', '0775409509', 'Khánh Hòa', '2', '2020-06-20'),
-('71136113', 'Trương Ngọc', 'Hào', 1, '2001-11-12', 'huynguyen71101@gmail.com', '0771350000', 'Phú Yên', '3', '2020-06-12'),
-('71136114', 'Hồ Văn', 'Hiếu', 1, '2001-06-05', 'huynguyen7111@gmail.com', '0775409509', 'Khánh Hòa', '3', '2020-06-20'),
-('71136115', 'Trần Trung', 'Hiếu', 1, '2001-11-02', 'huynguyen7111@gmail.com', '0775409509', 'Phú Yên', '4', '2020-06-20'),
-('71136116', 'Đàm Thuyết', 'Hòa', 0, '2001-01-02', 'huynguyen7111@gmail.com', '0775409509', 'Khánh Hòa', '4', '2020-06-20'),
-('71136117', 'Hồ Nhật', 'Hoàng', 1, '2001-06-12', 'huynguyen71101@gmail.com', '0771350000', 'Phú Yên', '2', '2020-06-12'),
-('71136118', 'Phan Thị', 'Dung', 0, '2001-06-28', 'huynguyen7111@gmail.com', '0775409509', 'Khánh Hòa', '2', '2020-06-20'),
-('71136119', 'Nguyễn Đăng', 'Khoa', 1, '2001-11-12', 'huynguyen71101@gmail.com', '0771350000', 'Phú Yên', '3', '2020-06-12'),
-('71136133', 'Hoàng Công', 'Kiên', 1, '2001-06-05', 'huynguyen7111@gmail.com', '0775409509', 'Khánh Hòa', '3', '2020-06-20'),
-('71136144', 'Tạ Bảo', 'Minh', 1, '2001-11-02', 'huynguyen7111@gmail.com', '0775409509', 'Phú Yên', '4', '2020-06-20'),
-('71136155', 'Trịnh Minh', 'Phúc', 0, '2001-01-02', 'huynguyen7111@gmail.com', '0775409509', 'Khánh Hòa', '4', '2020-06-20');
+('61112345', 'Phạm Hữu', 'Danh', 1, '2001-02-13', 'vietnam65241@gmail.com', '0314252242', 'Khánh Hòa', '1', '2023-09-05'),
+('61112346', 'Huỳnh Quốc', 'Đạt', 1, '2001-02-23', 'vietnam65242@gmail.com', '0314252242', 'Phú Yên', '1', '2023-06-13'),
+('61112347', 'Lê Thị', 'Hiền', 0, '2001-02-03', 'vietnam65232@gmail.com', '0314252246', 'Khánh Hòa', '1', '2023-09-05'),
+('61112348', 'Huỳnh Diệp', 'Phụng', 0, '2001-03-14', 'vietnam63532@gmail.com', '0314252255', 'Phú Yên', '1', '2023-04-10'),
+('61112349', 'Phạm Văn', 'Kiên', 1, '2001-02-13', 'huynguyen71101@gmail.com', '0314252265', 'Khánh Hòa', '2', '2023-09-05'),
+('61136483', 'Nguyễn Ngọc', 'Huy', 1, '2001-02-03', 'huynguyen71101@gmail.com', '0314252266', 'Phú Yên', '1', '2023-08-14'),
+('61136484', 'Triệu Nam', 'Dương', 1, '2001-04-18', 'vietnam652424@gmail.com', '0314252246', 'Khánh Hòa', '1', '2023-09-05'),
+('61136485', 'Hồ Văn', 'Hiếu', 1, '2001-04-13', 'huynguyen71101@gmail.com', '031425224', 'Khánh Hòa', '1', '2022-04-02'),
+('61136487', 'Ngô', 'Hải', 1, '2001-04-24', 'vietnam54251@gmail.com', '0314252246', 'Khánh Hòa', '1', '2021-09-05'),
+('61144512', 'Huỳnh Quốc', 'Đạt', 1, '2001-02-13', 'vietnam65463@gmail.com', '0314252246', 'Phú Yên', '2', '2023-09-05'),
+('61154553', 'Vũ Thị', 'An', 0, '2001-05-24', 'vietnam65277@gmail.com', '0314242455', 'Phú Yên', '3', '2023-09-05'),
+('61154554', 'Nguyễn', 'Minh', 1, '2002-07-23', 'huynguyen71101@gmail.com', '0314252242', 'Khánh Hòa', '3', '2023-09-07'),
+('61164234', 'Nguyễn Văn', 'Hùng', 1, '2001-02-03', 'vietnam65242@gmail.com', '0314252256', 'Khánh Hòa', '4', '2023-09-05'),
+('61164235', 'Trần', 'Hào', 1, '2000-12-21', 'huynguyen71101@gmail.com', '0314252211', 'Phú Yên', '5', '2023-09-05'),
+('61164236', 'Lê Thị', 'Dung', 0, '2001-04-16', 'vietnam65242@gmail.com', '0314252246', 'Khánh Hòa', '5', '2023-09-05'),
+('61164237', 'Lê Thị', 'Dung', 0, '2001-04-16', 'doitunglam1@gmail.com', '0314252246', 'Khánh Hòa', '5', '2023-09-05');
 
 -- --------------------------------------------------------
 
@@ -193,34 +170,22 @@ CREATE TABLE `giu` (
 --
 
 INSERT INTO `giu` (`MaDV`, `MaChucVu`, `NgayNhanChuc`, `NgayHetNhiemKy`) VALUES
-('123213', '1', '2024-02-23', '2024-02-23'),
-('20203443', '3', '2024-02-23', '2024-02-23'),
-('61134111', '2', '2021-06-19', '2024-06-19'),
-('61134112', '3', '2021-06-19', '2024-06-19'),
-('61136110', '4', '2021-06-19', '2024-06-19'),
-('61136111', '4', '2023-06-19', '2023-06-19'),
-('61136112', '4', '2023-06-19', '2023-06-19'),
-('61136113', '1', '2023-06-19', '2023-06-19'),
-('61136114', '1', '2023-06-19', '2023-06-19'),
-('61136115', '1', '2023-06-19', '2023-06-19'),
-('61136116', '1', '2023-06-19', '2023-06-19'),
-('61136117', '1', '2023-06-19', '2023-06-19'),
-('61136118', '1', '2023-06-19', '2023-06-19'),
-('61136119', '1', '2023-06-19', '2023-06-19'),
-('61136401', '2', '2023-06-19', '2023-06-19'),
-('61136412', '1', '2023-06-20', '2023-06-20'),
-('61136481', '1', '2023-06-19', '2023-06-19'),
-('71136111', '1', '2023-06-19', '2023-06-19'),
-('71136112', '1', '2023-06-19', '2023-06-19'),
-('71136113', '1', '2023-06-19', '2023-06-19'),
-('71136114', '1', '2023-06-19', '2023-06-19'),
-('71136115', '1', '2023-06-19', '2023-06-19'),
-('71136116', '1', '2023-06-19', '2023-06-19'),
-('71136117', '1', '2023-06-19', '2023-06-19'),
-('71136118', '1', '2023-06-19', '2023-06-19'),
-('71136119', '1', '2023-06-19', '2023-06-19'),
-('71136133', '1', '2023-06-19', '2023-06-19'),
-('71136144', '1', '2023-06-19', '2023-06-19');
+('61112345', '1', '2024-04-18', '2024-04-18'),
+('61112346', '2', '2024-04-18', '2024-04-18'),
+('61112347', '4', '2024-04-18', '2024-04-18'),
+('61112348', '1', '2024-04-18', '2024-04-18'),
+('61112349', '3', '2024-04-18', '2024-04-18'),
+('61136483', '1', '2024-04-18', '2024-04-18'),
+('61136484', '1', '2024-04-18', '2024-04-18'),
+('61136485', '4', '2024-04-18', '2024-04-18'),
+('61136487', '1', '2024-04-18', '2024-04-18'),
+('61144512', '1', '2024-04-18', '2024-04-18'),
+('61154553', '1', '2024-04-18', '2024-04-18'),
+('61154554', '4', '2024-04-18', '2024-04-18'),
+('61164234', '1', '2024-04-18', '2024-04-18'),
+('61164235', '1', '2024-04-18', '2024-04-18'),
+('61164236', '1', '2024-04-18', '2024-04-18'),
+('61164237', '1', '2024-04-18', '2024-04-18');
 
 -- --------------------------------------------------------
 
@@ -274,14 +239,14 @@ CREATE TABLE `lich` (
   `HocKy` varchar(4) NOT NULL,
   `ThoiDiem` date NOT NULL,
   `TrangThai` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `lich`
 --
 
 INSERT INTO `lich` (`MaLich`, `MaCD`, `HocKy`, `ThoiDiem`, `TrangThai`) VALUES
-(3, '1', 'HK2', '2024-02-26', NULL);
+(10, '5', 'HK1', '2024-04-18', NULL);
 
 -- --------------------------------------------------------
 
@@ -388,27 +353,21 @@ CREATE TABLE `renluyen` (
   `HocKy` varchar(11) NOT NULL,
   `Diem` int(11) NOT NULL,
   `XepLoai` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `renluyen`
 --
 
 INSERT INTO `renluyen` (`MaDV`, `HocKy`, `Diem`, `XepLoai`) VALUES
-('61134111', 'HK1', 10, 'Trung bình'),
-('61134112', 'HK1', 10, 'Trung bình'),
-('61136110', 'HK1', 10, 'Trung bình'),
-('61136111', 'HK1', 10, 'Trung bình'),
-('61136112', 'HK1', 10, 'Trung bình'),
-('61136113', 'HK1', 10, 'Trung bình'),
-('61136114', 'HK1', 10, 'Trung bình'),
-('61136115', 'HK1', 10, 'Trung bình'),
-('61136116', 'HK1', 10, 'Trung bình'),
-('61136117', 'HK1', 10, 'Trung bình'),
-('61136118', 'HK1', 10, 'Trung bình'),
-('61136119', 'HK1', 10, 'Trung bình'),
-('61136401', 'HK1', 10, 'Trung bình'),
-('61136481', 'HK1', 10, 'Trung bình');
+('61112345', 'HK1', 77, 'Khá'),
+('61112346', 'HK1', 77, 'Khá'),
+('61112347', 'HK1', 0, 'Trung bình'),
+('61112348', 'HK1', 0, 'Trung bình'),
+('61136483', 'HK1', 77, 'Khá'),
+('61136484', 'HK1', 77, 'Khá'),
+('61136485', 'HK1', 77, 'Khá'),
+('61136487', 'HK1', 77, 'Khá');
 
 -- --------------------------------------------------------
 
@@ -468,8 +427,8 @@ INSERT INTO `taikhoan` (`id`, `name`, `email`, `email_verified_at`, `password`, 
 (3, 'admin22', 'admin1@admin.com', NULL, '$2y$10$RcacQDGfq8BXexIkzTe4aOk.alOEiYEtUHz6N9u.TuHp.NGHMpmjm', NULL, '2023-06-12 19:42:41', '2023-06-12 19:42:41', 0),
 (4, 'admin222', 'admin11@admin.com', NULL, '$2y$10$vBHvyl9koHMa2jXUM2wD9eZi7w/dj.o.on3CgOXF0NSMw.QNWcp86', NULL, '2023-06-12 20:10:50', '2023-06-12 20:10:50', 0),
 (5, 'admin2222222', 'admin111@admin.com', NULL, '$2y$10$.eX2qd4xKmUT2M1quyvC1OdXizpDgbIfZEzJ0jbSPpG4btGtMSfB6', NULL, '2023-06-12 20:11:14', '2023-06-12 20:11:14', 10),
-(7, 'doitunglam1@gmail.com', 'doitunglam1@gmail.com', NULL, '$2y$10$TEprjnF6ptF4GGSHouOQ1.zrHuxKFfOeJ2YnsMqBWyUfAnGZv16Ia', NULL, '2023-06-16 05:45:41', '2023-06-16 05:45:41', 0),
-(8, 'huynguyen71101@gmail.com', 'huynguyen71101@gmail.com', NULL, '$2y$10$nCAXphEccoxHpHvXZOjpM.BKk0oUgpGMz83EGgCRLkQSFgQDSYUyy', NULL, '2023-06-16 09:04:02', '2023-06-16 09:04:02', 10);
+(7, 'doitunglam1@gmail.com', 'doitunglam1@gmail.com', NULL, '$2y$10$TEprjnF6ptF4GGSHouOQ1.zrHuxKFfOeJ2YnsMqBWyUfAnGZv16Ia', NULL, '2023-06-16 05:45:41', '2023-06-16 05:45:41', 10),
+(8, 'huynguyen71101@gmail.com', 'huynguyen71101@gmail.com', NULL, '$2y$10$nCAXphEccoxHpHvXZOjpM.BKk0oUgpGMz83EGgCRLkQSFgQDSYUyy', NULL, '2023-06-16 09:04:02', '2023-06-16 09:04:02', 0);
 
 --
 -- Indexes for dumped tables
@@ -567,6 +526,17 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `renluyen`
+--
+ALTER TABLE `renluyen`
+  ADD UNIQUE KEY `MaDV_2` (`MaDV`),
+  ADD UNIQUE KEY `MaDV_4` (`MaDV`),
+  ADD UNIQUE KEY `MaDV_6` (`MaDV`),
+  ADD KEY `MaDV` (`MaDV`),
+  ADD KEY `MaDV_3` (`MaDV`),
+  ADD KEY `MaDV_5` (`MaDV`);
+
+--
 -- Indexes for table `sinhhoat`
 --
 ALTER TABLE `sinhhoat`
@@ -601,7 +571,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `lich`
 --
 ALTER TABLE `lich`
-  MODIFY `MaLich` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `MaLich` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -649,6 +619,18 @@ ALTER TABLE `doanvien`
 ALTER TABLE `giu`
   ADD CONSTRAINT `giu_ibfk_1` FOREIGN KEY (`MaDV`) REFERENCES `doanvien` (`MaDV`),
   ADD CONSTRAINT `giu_ibfk_2` FOREIGN KEY (`MaChucVu`) REFERENCES `chucvu` (`MaChucVu`);
+
+--
+-- Constraints for table `lich`
+--
+ALTER TABLE `lich`
+  ADD CONSTRAINT `lich_ibfk_1` FOREIGN KEY (`MaCD`) REFERENCES `chidoan` (`MaCD`);
+
+--
+-- Constraints for table `renluyen`
+--
+ALTER TABLE `renluyen`
+  ADD CONSTRAINT `renluyen_ibfk_1` FOREIGN KEY (`MaDV`) REFERENCES `doanvien` (`MaDV`);
 
 --
 -- Constraints for table `sinhhoat`
