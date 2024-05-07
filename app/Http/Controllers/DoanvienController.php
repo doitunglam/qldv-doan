@@ -23,32 +23,49 @@ class DoanvienController extends BaseController
     // Return doanphi page
     public function view(Request $request)
     {
-
-        // if (\Auth::user()->cannot('viewAny', Doanvien::class)) {
-        //     return abort(403);
-        // }
-
-        $listCD = Chidoan::all();
-        $listCV = Chucvu::all();
-        $search = isset($request->all()['search']) ? $request->all()['search'] : "";
-        // is pagination needed ??
-
-        if ($search == "") {
-            $doanvien = Doanvien::leftJoin('chidoan', 'chidoan.MaCD', '=', 'doanvien.MaCD')->
-                leftJoin('giu', 'doanvien.MaDV', '=', 'giu.MaDV')->
-                leftJoin('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->
-                select('doanvien.*', 'TenCD', 'TenChucVu')->
-                get();
+        if ($request->user()->can('viewAny', Doanvien::class)) {
+            $listCD = Chidoan::all();
+            $listCV = Chucvu::all();
+            $search = isset($request->all()['search']) ? $request->all()['search'] : "";
+            if ($search == "") {
+                $doanvien = Doanvien::leftJoin('chidoan', 'chidoan.MaCD', '=', 'doanvien.MaCD')->
+                    leftJoin('giu', 'doanvien.MaDV', '=', 'giu.MaDV')->
+                    leftJoin('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->
+                    select('doanvien.*', 'TenCD', 'TenChucVu')->
+                    get();
+            } else {
+                $doanvien = Doanvien::leftJoin('chidoan', 'chidoan.MaCD', '=', 'doanvien.MaCD')->
+                    leftJoin('giu', 'doanvien.MaDV', '=', 'giu.MaDV')->
+                    leftJoin('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->
+                    where("doanvien.MaDV", "LIKE", "%" . $search . "%")->
+                    orWhere(DB::raw("CONCAT(doanvien.HoDV,' ',doanvien.TenDV)"), "LIKE", "%" . $search . "%")->
+                    select('doanvien.*', 'TenCD', 'TenChucVu')->
+                    get();
+            }
+            return view('doanvien', ['listcd' => $listCD, 'listcv' => $listCV, 'search' => $search, 'doanvien' => json_decode(json_encode($doanvien), true)]);
         } else {
-            $doanvien = Doanvien::leftJoin('chidoan', 'chidoan.MaCD', '=', 'doanvien.MaCD')->
-                leftJoin('giu', 'doanvien.MaDV', '=', 'giu.MaDV')->
-                leftJoin('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->
-                where("doanvien.MaDV", "LIKE", "%" . $search . "%")->
-                orWhere(DB::raw("CONCAT(doanvien.HoDV,' ',doanvien.TenDV)"), "LIKE", "%" . $search . "%")->
-                select('doanvien.*', 'TenCD', 'TenChucVu')->
-                get();
+            $listCD = Chidoan::all();
+            $listCV = Chucvu::all();
+            $search = isset($request->all()['search']) ? $request->all()['search'] : "";
+            if ($search == "") {
+                $doanvien = Doanvien::leftJoin('chidoan', 'chidoan.MaCD', '=', 'doanvien.MaCD')->
+                    leftJoin('giu', 'doanvien.MaDV', '=', 'giu.MaDV')->
+                    leftJoin('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->
+                    where('doanvien.Email', '=', $request->user()->email)->
+                    select('doanvien.*', 'TenCD', 'TenChucVu')->
+                    first();
+            } else {
+                $doanvien = Doanvien::leftJoin('chidoan', 'chidoan.MaCD', '=', 'doanvien.MaCD')->
+                    leftJoin('giu', 'doanvien.MaDV', '=', 'giu.MaDV')->
+                    leftJoin('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->
+                    where("doanvien.MaDV", "LIKE", "%" . $search . "%")->
+                    orWhere(DB::raw("CONCAT(doanvien.HoDV,' ',doanvien.TenDV)"), "LIKE", "%" . $search . "%")->
+                    select('doanvien.*', 'TenCD', 'TenChucVu')->
+                    first();
+            }
+            return view('doanvien-single', ['doanvien' => $doanvien]);
         }
-        return view('doanvien', ['listcd' => $listCD, 'listcv' => $listCV, 'search' => $search, 'doanvien' => json_decode(json_encode($doanvien), true)]);
+
     }
 
     // Tao doan vien moi
