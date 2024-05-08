@@ -82,7 +82,6 @@ class AuthController extends BaseController
         // if the user exits, use that user and login
         $email = $mailUser->email;
 
-
         // try to get user base on the email
         $user = Doanvien::where('Email', '=', $email)->first();
 
@@ -100,7 +99,6 @@ class AuthController extends BaseController
             $request->session()->regenerate();
 
             $user = Auth::user();
-            // dd($user);
             return redirect('/');
         }
     }

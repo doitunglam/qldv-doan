@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Thiagoprz\CompositeKey\HasCompositeKey;
 
 /**
  * Class Renluyen
@@ -20,11 +21,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Renluyen extends Model
 {
+    use HasCompositeKey;
     protected $table = 'renluyen';
     public $incrementing = false;
     public $timestamps = false;
 
-    protected $primaryKey = 'MaDV';
+    protected $primaryKey = ['MaDV', 'HocKy'];
     protected $casts = [
         'Diem' => 'int'
     ];

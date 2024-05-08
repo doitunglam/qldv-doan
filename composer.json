@@ -18,7 +18,8 @@
         "laravel/tinker": "^2.5",
         "reliese/laravel": "^1.2",
         "symfony/http-client": "^6.0",
-        "symfony/postmark-mailer": "^6.0"
+        "symfony/postmark-mailer": "^6.0",
+        "thiagoprz/eloquent-composite-key": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

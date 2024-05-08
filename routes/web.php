@@ -29,11 +29,12 @@ Route::get('/logout', [AuthController::class, 'remove']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/', function () {
         return view('home');
-    });
+    })->name('index');
 
     Route::get('/doanphi', [DoanphiController::class, 'view']);
     Route::post('/doanphi/data', [DoanphiController::class, 'getData']);
     Route::post('/doanphi/entry', [DoanphiController::class, 'update']);
+
 
 
     Route::get('/doanvien', [DoanvienController::class, 'view']);
@@ -49,4 +50,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/renluyen/entryBulk', [RenluyenController::class, 'updateBulk']);
 
     Route::resource('lich', LichController::class);
+});
+
+Route::fallback(function () {
+    return redirect()->route('index');
 });

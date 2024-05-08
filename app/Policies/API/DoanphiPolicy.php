@@ -3,6 +3,8 @@
 namespace App\Policies\API;
 
 use App\Models\Doanphi;
+use App\Models\Doanvien;
+use App\Models\Giu;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -19,7 +21,9 @@ class DoanphiPolicy
     public function viewAny(User $user)
     {
         //
-        return $user->Quyen === 1;
+        $madv = Doanvien::where('Email', $user->email)->first()->MaDV;
+        $machucvu = Giu::join('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->where('giu.MaDV', $madv)->select('giu.*', 'chucvu.*')->first()->MaChucVu;
+        return $machucvu > 1;
 
     }
 

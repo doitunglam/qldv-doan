@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\API\BaseController;
 use App\Models\Chidoan;
+use App\Models\Doanvien;
 use App\Models\Renluyen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,15 +14,31 @@ use Validator;
 class RenluyenController extends BaseController
 {
     //
-    // Return doanphi page
-    public function view()
+    public function view(Request $request)
     {
-        $listcd = Chidoan::all();
-        return view('renluyen', ['listcd' => $listcd]);
+        if ($request->user()->can('viewAny', Renluyen::class)) {
+            $listcd = Chidoan::all();
+            $listcdSorted = [];
+            foreach ($listcd as $chidoan) {
+                if ($request->user()->can('view', $chidoan)) {
+                    array_push($listcdSorted, $chidoan);
+                }
+            }
+            // $response = new \stdClass;
+            // $response->message = $listcdSorted;
+            // $response->status = 1;
+            // return $this->sendResponse($response, "OK");
+
+            return view('renluyen', ['listcd' => $listcdSorted]);
+        } else {
+            $renluyen = Renluyen::where('MaDV', '=', Doanvien::where('Email', $request->user()->email)->first()->MaDV)->get();
+
+            return view('renluyen-single', ['listrl' => $renluyen]);
+
+        }
     }
 
 
-    // Return chidoan's doanphi list
     public function getData(Request $request)
     {
         // must go to repository pattern, but I'm too tired to do it
@@ -58,8 +75,9 @@ class RenluyenController extends BaseController
         $input = $request->all();
 
         $maDV = $input['MaDV'];
+        $hocKy = $input['HocKy'];
 
-        $renluyen = Renluyen::where("MaDV", $maDV)->first();
+        $renluyen = Renluyen::where("MaDV", $maDV)->where("HocKy", $hocKy)->first();
 
         if (isset($renluyen)) {
             unset($input['MaDV']);

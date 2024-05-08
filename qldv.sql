@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2024 at 12:54 PM
+-- Generation Time: May 08, 2024 at 11:52 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -90,10 +90,11 @@ CREATE TABLE `doanphi` (
 --
 
 INSERT INTO `doanphi` (`MaDV`, `HK1`, `HK2`, `HK3`, `HK4`, `HK5`, `HK6`, `HK7`, `HK8`) VALUES
-('61112345', 0, 1, 0, 1, 1, 0, 0, 0),
+('61112345', 0, 1, 0, 1, 1, 0, 1, 0),
 ('61112346', 1, 0, 1, 0, 0, 1, 0, 0),
 ('61164235', 0, 0, 0, 0, 0, 0, 0, 0),
-('61164236', 1, 0, 0, 0, 0, 0, 0, 0);
+('61164236', 1, 0, 0, 0, 0, 0, 0, 0),
+('61164237', 1, 1, 1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -367,7 +368,12 @@ INSERT INTO `renluyen` (`MaDV`, `HocKy`, `Diem`, `XepLoai`) VALUES
 ('61136483', 'HK1', 77, 'Khá'),
 ('61136484', 'HK1', 77, 'Khá'),
 ('61136485', 'HK1', 77, 'Khá'),
-('61136487', 'HK1', 77, 'Khá');
+('61136487', 'HK1', 77, 'Khá'),
+('61164237', 'HK1', 100, 'Xuất sắc'),
+('61164237', 'HK2', 100, 'Xuất sắc'),
+('61164237', 'HK3', 100, 'Khá'),
+('61164237', 'HK4', 100, 'Xuất sắc'),
+('61164237', 'HK5', 100, 'Xuất sắc');
 
 -- --------------------------------------------------------
 
@@ -529,12 +535,7 @@ ALTER TABLE `personal_access_tokens`
 -- Indexes for table `renluyen`
 --
 ALTER TABLE `renluyen`
-  ADD UNIQUE KEY `MaDV_2` (`MaDV`),
-  ADD UNIQUE KEY `MaDV_4` (`MaDV`),
-  ADD UNIQUE KEY `MaDV_6` (`MaDV`),
-  ADD KEY `MaDV` (`MaDV`),
-  ADD KEY `MaDV_3` (`MaDV`),
-  ADD KEY `MaDV_5` (`MaDV`);
+  ADD PRIMARY KEY (`MaDV`,`HocKy`);
 
 --
 -- Indexes for table `sinhhoat`

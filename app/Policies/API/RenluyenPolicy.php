@@ -2,14 +2,14 @@
 
 namespace App\Policies\API;
 
-use App\Models\Chidoan;
+use App\Models\User;
 use App\Models\Doanvien;
 use App\Models\Giu;
-use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ChidoanPolicy
+class RenluyenPolicy
 {
+    use HandlesAuthorization;
     use HandlesAuthorization;
 
     /**
@@ -21,29 +21,21 @@ class ChidoanPolicy
     public function viewAny(User $user)
     {
         //
-        return $user->Quyen === 1;
-
+        $madv = Doanvien::where('Email', $user->email)->first()->MaDV;
+        $machucvu = Giu::join('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->where('giu.MaDV', $madv)->select('giu.*', 'chucvu.*')->first()->MaChucVu;
+        return $machucvu > 1;
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Chidoan  $chidoan
+     * @param  \App\Models\Renluyen  $renluyen
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Chidoan $chidoan)
+    public function view(User $user, Renluyen $renluyen)
     {
         //
-        $doanvien = Doanvien::where('Email', $user->email)->first();
-        $madv = $doanvien->MaDV;
-        $machucvu = Giu::join('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->where('giu.MaDV', $madv)->select('giu.*', 'chucvu.*')->first()->MaChucVu;
-
-        if ($chidoan->MaCD == $doanvien->MaCD && $machucvu > 1)
-            return true;
-        if ($machucvu == 4)
-            return true;
-        return false;
     }
 
     /**
@@ -55,63 +47,53 @@ class ChidoanPolicy
     public function create(User $user)
     {
         //
-        return $user->Quyen === 1;
-
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Chidoan  $chidoan
+     * @param  \App\Models\Renluyen  $renluyen
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Chidoan $chidoan)
+    public function update(User $user, Renluyen $renluyen)
     {
         //
-        return $user->Quyen === 1;
-
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Chidoan  $chidoan
+     * @param  \App\Models\Renluyen  $renluyen
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Chidoan $chidoan)
+    public function delete(User $user, Renluyen $renluyen)
     {
         //
-        return $user->Quyen === 1;
-
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Chidoan  $chidoan
+     * @param  \App\Models\Renluyen  $renluyen
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Chidoan $chidoan)
+    public function restore(User $user, Renluyen $renluyen)
     {
         //
-        return $user->Quyen === 1;
-
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Chidoan  $chidoan
+     * @param  \App\Models\Renluyen  $renluyen
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Chidoan $chidoan)
+    public function forceDelete(User $user, Renluyen $renluyen)
     {
         //
-        return $user->Quyen === 1;
-
     }
 }

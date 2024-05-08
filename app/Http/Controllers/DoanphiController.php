@@ -17,10 +17,22 @@ use App\Http\Resources\Product as ProductResource;
 class DoanphiController extends BaseController
 {
     // Return doanphi page
-    public function view()
+    public function view(Request $request)
     {
-        $listCD = Chidoan::all();
-        return view('doanphi', ['listcd' => $listCD]);
+        if ($request->user()->can('viewAny', Doanphi::class)) {
+            $listcd = Chidoan::all();
+            $listcdSorted = [];
+            foreach ($listcd as $chidoan) {
+                if ($request->user()->can('view', $chidoan)) {
+                    array_push($listcdSorted, $chidoan);
+                }
+            }
+            return view('doanphi', ['listcd' => $listcdSorted]);
+        } else {
+            $doanphi = Doanphi::where('MaDV', '=', Doanvien::where('Email', $request->user()->email)->first()->MaDV)->first();
+
+            return view('doanphi-single', ['doanphi' => $doanphi]);
+        }
     }
 
 
@@ -70,9 +82,8 @@ class DoanphiController extends BaseController
             }
 
             $doanphi->save();
-        } else
-        {
-             $doanphi = Doanphi::create($input);
+        } else {
+            $doanphi = Doanphi::create($input);
         }
 
         return $this->sendResponse($input, "Luu doan phi thanh cong!");

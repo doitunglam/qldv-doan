@@ -15,6 +15,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Gate;
 use Validator;
 use App\Http\Resources\Product as ProductResource;
 
@@ -63,7 +64,7 @@ class DoanvienController extends BaseController
                     select('doanvien.*', 'TenCD', 'TenChucVu')->
                     first();
             }
-            return view('doanvien-single', ['doanvien' => $doanvien]);
+            return view('doanvien-single', ['doanvien' => $doanvien, 'listcd' => $listCD, 'listcv' => $listCV]);
         }
 
     }
