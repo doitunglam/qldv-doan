@@ -23,7 +23,7 @@ class DoanphiPolicy
         //
         $madv = Doanvien::where('Email', $user->email)->first()->MaDV;
         $machucvu = Giu::join('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->where('giu.MaDV', $madv)->select('giu.*', 'chucvu.*')->first()->MaChucVu;
-        return $machucvu > 1;
+        return $machucvu == 2 || $machucvu == 3;
 
     }
 

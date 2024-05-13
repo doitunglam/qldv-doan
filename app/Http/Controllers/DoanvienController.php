@@ -27,23 +27,34 @@ class DoanvienController extends BaseController
         if ($request->user()->can('viewAny', Doanvien::class)) {
             $listCD = Chidoan::all();
             $listCV = Chucvu::all();
+            $listCDSorted = [];
+            foreach ($listCD as $chidoan) {
+                if ($request->user()->can('view', $chidoan)) {
+                    array_push($listCDSorted, $chidoan);
+                }
+            }
+            $listCDSortedId = array_map(function (Chidoan $chidoan) {
+                return $chidoan->MaCD; }, $listCDSorted);
             $search = isset($request->all()['search']) ? $request->all()['search'] : "";
             if ($search == "") {
                 $doanvien = Doanvien::leftJoin('chidoan', 'chidoan.MaCD', '=', 'doanvien.MaCD')->
                     leftJoin('giu', 'doanvien.MaDV', '=', 'giu.MaDV')->
                     leftJoin('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->
+                    whereIn('doanvien.MaCD', $listCDSortedId)->
                     select('doanvien.*', 'TenCD', 'TenChucVu')->
                     get();
             } else {
                 $doanvien = Doanvien::leftJoin('chidoan', 'chidoan.MaCD', '=', 'doanvien.MaCD')->
                     leftJoin('giu', 'doanvien.MaDV', '=', 'giu.MaDV')->
                     leftJoin('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->
+                    whereIn('doanvien.MaCD', $listCDSortedId)->
                     where("doanvien.MaDV", "LIKE", "%" . $search . "%")->
                     orWhere(DB::raw("CONCAT(doanvien.HoDV,' ',doanvien.TenDV)"), "LIKE", "%" . $search . "%")->
                     select('doanvien.*', 'TenCD', 'TenChucVu')->
                     get();
             }
-            return view('doanvien', ['listcd' => $listCD, 'listcv' => $listCV, 'search' => $search, 'doanvien' => json_decode(json_encode($doanvien), true)]);
+
+            return view('doanvien', ['listcd' => $listCDSorted, 'listcv' => $listCV, 'search' => $search, 'doanvien' => json_decode(json_encode($doanvien), true)]);
         } else {
             $listCD = Chidoan::all();
             $listCV = Chucvu::all();

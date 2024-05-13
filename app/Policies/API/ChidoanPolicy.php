@@ -39,9 +39,11 @@ class ChidoanPolicy
         $madv = $doanvien->MaDV;
         $machucvu = Giu::join('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->where('giu.MaDV', $madv)->select('giu.*', 'chucvu.*')->first()->MaChucVu;
 
-        if ($chidoan->MaCD == $doanvien->MaCD && $machucvu > 1)
+        if ($user->Quyen === 10) {
             return true;
-        if ($machucvu == 4)
+        }
+
+        if (($chidoan->MaCD == $doanvien->MaCD) && ($machucvu == 2 || $machucvu == 3))
             return true;
         return false;
     }
