@@ -92,10 +92,10 @@ class AuthController extends BaseController
 
             if (!isset($taikhoan))
             {
-                $dulieu = ["id"=> $email, "name"=>$email, "email" => $email, "password" =>Hash::make($mailUser->getId()), "Quyen" => 0 ];
+                $dulieu = ["id"=> $email, "name"=>$email, "email" => $email, "password" =>Hash::make("P@ssword123"), "Quyen" => 0 ];
                 User::create($dulieu);
             }
-            Auth::attempt(['email' => $email, 'password' => $mailUser->getId()]);
+            Auth::attempt(['email' => $email, 'password' => "P@ssword123"]);
             $request->session()->regenerate();
 
             $user = Auth::user();

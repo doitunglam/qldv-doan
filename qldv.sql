@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2024 at 05:52 AM
+-- Generation Time: May 13, 2024 at 06:09 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -433,8 +433,8 @@ INSERT INTO `taikhoan` (`id`, `name`, `email`, `email_verified_at`, `password`, 
 (3, 'admin22', 'admin1@admin.com', NULL, '$2y$10$RcacQDGfq8BXexIkzTe4aOk.alOEiYEtUHz6N9u.TuHp.NGHMpmjm', NULL, '2023-06-12 19:42:41', '2023-06-12 19:42:41', 0),
 (4, 'admin222', 'admin11@admin.com', NULL, '$2y$10$vBHvyl9koHMa2jXUM2wD9eZi7w/dj.o.on3CgOXF0NSMw.QNWcp86', NULL, '2023-06-12 20:10:50', '2023-06-12 20:10:50', 0),
 (5, 'admin2222222', 'admin111@admin.com', NULL, '$2y$10$.eX2qd4xKmUT2M1quyvC1OdXizpDgbIfZEzJ0jbSPpG4btGtMSfB6', NULL, '2023-06-12 20:11:14', '2023-06-12 20:11:14', 10),
-(7, 'doitunglam1@gmail.com', 'doitunglam1@gmail.com', NULL, '$2y$10$TEprjnF6ptF4GGSHouOQ1.zrHuxKFfOeJ2YnsMqBWyUfAnGZv16Ia', NULL, '2023-06-16 05:45:41', '2023-06-16 05:45:41', 0),
-(8, 'huynguyen71101@gmail.com', 'huynguyen71101@gmail.com', NULL, '$2y$10$nCAXphEccoxHpHvXZOjpM.BKk0oUgpGMz83EGgCRLkQSFgQDSYUyy', NULL, '2023-06-16 09:04:02', '2023-06-16 09:04:02', 0);
+(8, 'huynguyen71101@gmail.com', 'huynguyen71101@gmail.com', NULL, '$2y$10$nCAXphEccoxHpHvXZOjpM.BKk0oUgpGMz83EGgCRLkQSFgQDSYUyy', NULL, '2023-06-16 09:04:02', '2023-06-16 09:04:02', 0),
+(10, 'doitunglam1@gmail.com', 'doitunglam1@gmail.com', NULL, '$2y$10$vZmONVgzGb323mqO0zdb..TX1esdRCwh3voaIon1Uxd7h6mVahv/W', NULL, '2024-05-12 21:07:29', '2024-05-12 21:07:29', 10);
 
 --
 -- Indexes for dumped tables
@@ -590,7 +590,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `taikhoan`
 --
 ALTER TABLE `taikhoan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
