@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 08, 2024 at 11:52 AM
+-- Generation Time: May 13, 2024 at 05:52 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -186,7 +186,7 @@ INSERT INTO `giu` (`MaDV`, `MaChucVu`, `NgayNhanChuc`, `NgayHetNhiemKy`) VALUES
 ('61164234', '1', '2024-04-18', '2024-04-18'),
 ('61164235', '1', '2024-04-18', '2024-04-18'),
 ('61164236', '1', '2024-04-18', '2024-04-18'),
-('61164237', '1', '2024-04-18', '2024-04-18');
+('61164237', '2', '2024-04-18', '2024-04-18');
 
 -- --------------------------------------------------------
 
@@ -433,7 +433,7 @@ INSERT INTO `taikhoan` (`id`, `name`, `email`, `email_verified_at`, `password`, 
 (3, 'admin22', 'admin1@admin.com', NULL, '$2y$10$RcacQDGfq8BXexIkzTe4aOk.alOEiYEtUHz6N9u.TuHp.NGHMpmjm', NULL, '2023-06-12 19:42:41', '2023-06-12 19:42:41', 0),
 (4, 'admin222', 'admin11@admin.com', NULL, '$2y$10$vBHvyl9koHMa2jXUM2wD9eZi7w/dj.o.on3CgOXF0NSMw.QNWcp86', NULL, '2023-06-12 20:10:50', '2023-06-12 20:10:50', 0),
 (5, 'admin2222222', 'admin111@admin.com', NULL, '$2y$10$.eX2qd4xKmUT2M1quyvC1OdXizpDgbIfZEzJ0jbSPpG4btGtMSfB6', NULL, '2023-06-12 20:11:14', '2023-06-12 20:11:14', 10),
-(7, 'doitunglam1@gmail.com', 'doitunglam1@gmail.com', NULL, '$2y$10$TEprjnF6ptF4GGSHouOQ1.zrHuxKFfOeJ2YnsMqBWyUfAnGZv16Ia', NULL, '2023-06-16 05:45:41', '2023-06-16 05:45:41', 10),
+(7, 'doitunglam1@gmail.com', 'doitunglam1@gmail.com', NULL, '$2y$10$TEprjnF6ptF4GGSHouOQ1.zrHuxKFfOeJ2YnsMqBWyUfAnGZv16Ia', NULL, '2023-06-16 05:45:41', '2023-06-16 05:45:41', 0),
 (8, 'huynguyen71101@gmail.com', 'huynguyen71101@gmail.com', NULL, '$2y$10$nCAXphEccoxHpHvXZOjpM.BKk0oUgpGMz83EGgCRLkQSFgQDSYUyy', NULL, '2023-06-16 09:04:02', '2023-06-16 09:04:02', 0);
 
 --
