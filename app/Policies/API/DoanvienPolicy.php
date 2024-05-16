@@ -19,9 +19,19 @@ class DoanvienPolicy
      */
     public function viewAny(User $user)
     {
-        $madv = Doanvien::where('Email', $user->email)->first()->MaDV;
-        $machucvu = Giu::join('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->where('giu.MaDV', $madv)->select('giu.*', 'chucvu.*')->first()->MaChucVu;
-        return $machucvu == 2 || $machucvu == 3;
+        if ($user->Quyen == 10) {
+            return true;
+        }
+
+        $doanvien = Doanvien::where('Email', $user->email)->first();
+
+        if ($doanvien) {
+            $madv = $doanvien->MaDV;
+            $machucvu = Giu::join('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->where('giu.MaDV', $madv)->select('giu.*', 'chucvu.*')->first()->MaChucVu;
+            return $machucvu == 2 || $machucvu == 3;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -50,6 +60,9 @@ class DoanvienPolicy
         //
         $madv = Doanvien::where('Email', $user->email)->first()->MaDV;
         $machucvu = Giu::join('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->where('giu.MaDV', $madv)->select('giu.*', 'chucvu.*')->first()->MaChucVu;
+        if ($user->Quyen === 10) {
+            return true;
+        }
         return $machucvu == 2 || $machucvu == 3;
     }
 

@@ -3,6 +3,35 @@ var App = App || {};
 $(function () {
     App.Site.init();
 });
+
+function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(";");
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === " ") c = c.substring(1, c.length); // Remove leading spaces
+        if (c.indexOf(nameEQ) === 0) {
+            // Decode the cookie value before returning it
+            return decodeURIComponent(c.substring(nameEQ.length, c.length));
+        }
+    }
+    return null;
+}
+
+const JWT_TOKEN = getCookie("JWT_TOKEN");
+
+if (JWT_TOKEN) {
+    localStorage.setItem("JWT_TOKEN", JWT_TOKEN);
+}
+
+App.JWT_TOKEN = localStorage.getItem("JWT_TOKEN");
+
+$.ajaxSetup({
+    headers: {
+        Authorization: "Bearer " + App.JWT_TOKEN,
+    },
+});
+
 // Site
 App.Site = (function () {
     var init = function () {
@@ -111,7 +140,9 @@ App.TaiKhoan = (function () {
                     dangXuLy = false;
                     App.Site.hideAjaxLoading();
                     res = res.data;
-                    console.log(res);
+                    localStorage.setItem("JWT_TOKEN", res.token);
+                    App.JWT_TOKEN = res.token;
+                    console.log(localStorage.getItem("JWT_TOKEN"));
                     if (res.status) {
                         $(".login-box-body").slideUp(100);
                         $(".login-box-body")
@@ -577,7 +608,7 @@ App.DoanVien = (function () {
             App.Site.hideAjaxLoading();
 
             $.ajax({
-                url: baseurl + "/doanvien/them",
+                url: baseurl + "/api/doanvien",
                 type: "POST",
                 data: frmData,
                 dataType: "json",
@@ -585,7 +616,6 @@ App.DoanVien = (function () {
                     App.Site.hideAjaxLoading();
                     res = res.data;
                     dangXuLy = false;
-                    // console.log(res);
                     if (res.status == false) {
                         $("#errThemDV")
                             .removeClass("text-success")
@@ -617,10 +647,10 @@ App.DoanVien = (function () {
             App.Site.showAjaxLoading();
             dangXuLy = true;
             var frmData = $("#frmSuaDV").serialize();
-
+            const maDV = $("[name='MaDV']").attr('value');
             $.ajax({
-                url: baseurl + "/doanvien/sua",
-                type: "POST",
+                url: `${baseurl}/api/doanvien/${maDV}`,
+                type: "PUT",
                 data: frmData,
                 dataType: "json",
                 success: function (res) {
@@ -644,7 +674,8 @@ App.DoanVien = (function () {
                             .slideDown(200);
 
                         setTimeout(function () {
-                            window.location.href = baseurl + "doanvien";
+                            console.log("rd")
+                            window.location.href = baseurl + "/doanvien";
                         }, 700);
                     }
                 },
@@ -657,9 +688,8 @@ App.DoanVien = (function () {
             App.Site.showAjaxLoading();
             dangXuLy = true;
             $.ajax({
-                url: baseurl + "/doanvien/xoa",
-                type: "POST",
-                data: { MaDV: maDV },
+                url:`${baseurl}/api/doanvien/${maDV}`,
+                type: "DELETE",
                 dataType: "json",
                 success: function (res) {
                     res = res.data;

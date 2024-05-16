@@ -37,8 +37,8 @@ class AuthController extends BaseController
             $response->message = "Đăng nhập thành công";
             $response->status = 1;
             $response->request = $request;
-            // $success['token'] =  $user->createToken('MyApp')->plainTextToken;
-            // $success['name'] =  $user->name;
+            $response->token = $user->createToken('MyApp')->plainTextToken;
+            $response->name = $user->name;
 
             $request->session()->regenerate();
 
@@ -61,7 +61,7 @@ class AuthController extends BaseController
 
 
     /**
-     * Redirect the user to the GitHub authentication page.
+     * Redirect the user to the Google authentication page.
      *
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -90,16 +90,17 @@ class AuthController extends BaseController
         } else {
             $taikhoan = User::where('email', '=', $email)->first();
 
-            if (!isset($taikhoan))
-            {
-                $dulieu = ["id"=> $email, "name"=>$email, "email" => $email, "password" =>Hash::make("P@ssword123"), "Quyen" => 0 ];
+            if (! isset($taikhoan)) {
+                $dulieu = ["id" => $email, "name" => $email, "email" => $email, "password" => Hash::make("P@ssword123"), "Quyen" => 0];
                 User::create($dulieu);
             }
             Auth::attempt(['email' => $email, 'password' => "P@ssword123"]);
             $request->session()->regenerate();
 
             $user = Auth::user();
-            return redirect('/');
+            $cookie = \Cookie::make('JWT_TOKEN', $user->createToken('MyApp')->plainTextToken, 60, null, null, false, false);
+
+            return redirect('/')->withCookie($cookie);
         }
     }
 }

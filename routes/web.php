@@ -38,11 +38,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     Route::get('/doanvien', [DoanvienController::class, 'view']);
-    Route::post('/doanvien/them', [DoanvienController::class, 'create']);
     Route::get('/doanvien/sua', [DoanvienController::class, 'viewUpdate']);
-    Route::post('/doanvien/sua', [DoanvienController::class, 'update']);
     Route::get('/doanvien/xoa', [DoanvienController::class, 'viewDelete']);
-    Route::post('/doanvien/xoa', [DoanvienController::class, 'delete']);
 
     Route::get('/renluyen', [RenluyenController::class, 'view']);
     Route::post('/renluyen/data', [RenluyenController::class, 'getData']);
