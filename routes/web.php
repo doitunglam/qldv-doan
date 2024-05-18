@@ -5,6 +5,7 @@ use App\Http\Controllers\DoanphiController;
 use App\Http\Controllers\DoanvienController;
 use App\Http\Controllers\LichController;
 use App\Http\Controllers\RenluyenController;
+use App\Http\Controllers\ThongkeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +39,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/doanvien/xoa', [DoanvienController::class, 'viewDelete']);
 
     Route::get('/renluyen', [RenluyenController::class, 'view']);
+
+    Route::get('/thongke', [ThongkeController::class, 'view']);
 
     Route::resource('lich', LichController::class);
 });
