@@ -3,6 +3,7 @@
 namespace App\Policies\API;
 
 use App\Models\User;
+use App\Models\Renluyen;
 use App\Models\Doanvien;
 use App\Models\Giu;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -20,10 +21,19 @@ class RenluyenPolicy
      */
     public function viewAny(User $user)
     {
-        //
-        $madv = Doanvien::where('Email', $user->email)->first()->MaDV;
-        $machucvu = Giu::join('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->where('giu.MaDV', $madv)->select('giu.*', 'chucvu.*')->first()->MaChucVu;
-        return $machucvu == 2 || $machucvu == 3;
+        if ($user->Quyen == 10) {
+            return true;
+        }
+
+        $doanvien = Doanvien::where('Email', $user->email)->first();
+
+        if ($doanvien) {
+            $madv = $doanvien->MaDV;
+            $machucvu = Giu::join('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->where('giu.MaDV', $madv)->select('giu.*', 'chucvu.*')->first()->MaChucVu;
+            return $machucvu == 2 || $machucvu == 3;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -36,6 +46,13 @@ class RenluyenPolicy
     public function view(User $user, Renluyen $renluyen)
     {
         //
+        if ($user->Quyen == 10) {
+            return true;
+        }
+
+        $madv = Doanvien::where('Email', $user->email)->first()->MaDV;
+        $machucvu = Giu::join('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->where('giu.MaDV', $madv)->select('giu.*', 'chucvu.*')->first()->MaChucVu;
+        return ($machucvu == 2 || $machucvu == 3) || ($madv == $renluyen->MaDV);
     }
 
     /**
@@ -47,6 +64,13 @@ class RenluyenPolicy
     public function create(User $user)
     {
         //
+
+        $madv = Doanvien::where('Email', $user->email)->first()->MaDV;
+        $machucvu = Giu::join('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->where('giu.MaDV', $madv)->select('giu.*', 'chucvu.*')->first()->MaChucVu;
+        if ($user->Quyen === 10) {
+            return true;
+        }
+        return $machucvu == 2 || $machucvu == 3;
     }
 
     /**
@@ -59,6 +83,14 @@ class RenluyenPolicy
     public function update(User $user, Renluyen $renluyen)
     {
         //
+        $madv = Doanvien::where('Email', $user->email)->first()->MaDV;
+        $machucvu = Giu::join('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->where('giu.MaDV', $madv)->select('giu.*', 'chucvu.*')->first()->MaChucVu;
+
+        if ($user->Quyen === 10) {
+            return true;
+        }
+
+        return $machucvu == 2 || $machucvu == 3;
     }
 
     /**
@@ -71,6 +103,15 @@ class RenluyenPolicy
     public function delete(User $user, Renluyen $renluyen)
     {
         //
+
+        $madv = Doanvien::where('Email', $user->email)->first()->MaDV;
+        $machucvu = Giu::join('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->where('giu.MaDV', $madv)->select('giu.*', 'chucvu.*')->first()->MaChucVu;
+
+        if ($user->Quyen === 10) {
+            return true;
+        }
+
+        return $machucvu == 2 || $machucvu == 3;
     }
 
     /**
@@ -83,6 +124,14 @@ class RenluyenPolicy
     public function restore(User $user, Renluyen $renluyen)
     {
         //
+        $madv = Doanvien::where('Email', $user->email)->first()->MaDV;
+        $machucvu = Giu::join('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->where('giu.MaDV', $madv)->select('giu.*', 'chucvu.*')->first()->MaChucVu;
+
+        if ($user->Quyen === 10) {
+            return true;
+        }
+
+        return $machucvu == 2 || $machucvu == 3;
     }
 
     /**
@@ -95,5 +144,13 @@ class RenluyenPolicy
     public function forceDelete(User $user, Renluyen $renluyen)
     {
         //
+        $madv = Doanvien::where('Email', $user->email)->first()->MaDV;
+        $machucvu = Giu::join('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->where('giu.MaDV', $madv)->select('giu.*', 'chucvu.*')->first()->MaChucVu;
+
+        if ($user->Quyen === 10) {
+            return true;
+        }
+
+        return $machucvu == 2 || $machucvu == 3;
     }
 }

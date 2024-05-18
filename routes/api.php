@@ -6,6 +6,7 @@ use App\Http\Controllers\API\DoanphiController;
 use App\Http\Controllers\API\DoanvienController;
 use App\Http\Controllers\API\HoatdongController;
 use App\Http\Controllers\API\KhoaController;
+use App\Http\Controllers\API\RenluyenController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\RegisterController;
@@ -25,8 +26,12 @@ Route::post('login', [RegisterController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('register', [RegisterController::class, 'register']);
-    // Route::resource('sodoan', SoDoanController::class);
     Route::resource('doanvien', DoanvienController::class);
+
+    Route::get('renluyen/{MaCD}/{HocKy}', [RenluyenController::class, 'show']);
+    Route::post('renluyen', [RenluyenController::class, 'store']);
+    Route::put('renluyen', [RenluyenController::class, 'update']);
+
     Route::resource('chidoan', ChidoanController::class);
     Route::resource('chucvu', ChucvuController::class);
     Route::resource('doanphi', DoanphiController::class);

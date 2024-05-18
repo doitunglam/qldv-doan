@@ -43,6 +43,10 @@ class DoanvienPolicy
      */
     public function view(User $user, Doanvien $doanvien)
     {
+        if ($user->Quyen == 10) {
+            return true;
+        }
+
         //
         $madv = Doanvien::where('Email', $user->email)->first()->MaDV;
         $machucvu = Giu::join('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->where('giu.MaDV', $madv)->select('giu.*', 'chucvu.*')->first()->MaChucVu;
@@ -78,6 +82,11 @@ class DoanvienPolicy
         //
         $madv = Doanvien::where('Email', $user->email)->first()->MaDV;
         $machucvu = Giu::join('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->where('giu.MaDV', $madv)->select('giu.*', 'chucvu.*')->first()->MaChucVu;
+
+        if ($user->Quyen === 10) {
+            return true;
+        }
+
         return $machucvu == 2 || $machucvu == 3;
     }
 
@@ -93,6 +102,11 @@ class DoanvienPolicy
         //
         $madv = Doanvien::where('Email', $user->email)->first()->MaDV;
         $machucvu = Giu::join('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->where('giu.MaDV', $madv)->select('giu.*', 'chucvu.*')->first()->MaChucVu;
+
+        if ($user->Quyen === 10) {
+            return true;
+        }
+
         return $machucvu == 2 || $machucvu == 3;
     }
 
@@ -108,6 +122,11 @@ class DoanvienPolicy
         //
         $madv = Doanvien::where('Email', $user->email)->first()->MaDV;
         $machucvu = Giu::join('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->where('giu.MaDV', $madv)->select('giu.*', 'chucvu.*')->first()->MaChucVu;
+
+        if ($user->Quyen === 10) {
+            return true;
+        }
+
         return $machucvu == 2 || $machucvu == 3;
     }
 
@@ -123,6 +142,11 @@ class DoanvienPolicy
         //
         $madv = Doanvien::where('Email', $user->email)->first()->MaDV;
         $machucvu = Giu::join('chucvu', 'giu.MaChucVu', '=', 'chucvu.MaChucVu')->where('giu.MaDV', $madv)->select('giu.*', 'chucvu.*')->first()->MaChucVu;
+
+        if ($user->Quyen === 10) {
+            return true;
+        }
+
         return $machucvu == 2 || $machucvu == 3;
     }
 }

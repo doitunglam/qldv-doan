@@ -647,7 +647,7 @@ App.DoanVien = (function () {
             App.Site.showAjaxLoading();
             dangXuLy = true;
             var frmData = $("#frmSuaDV").serialize();
-            const maDV = $("[name='MaDV']").attr('value');
+            const maDV = $("[name='MaDV']").attr("value");
             $.ajax({
                 url: `${baseurl}/api/doanvien/${maDV}`,
                 type: "PUT",
@@ -674,7 +674,7 @@ App.DoanVien = (function () {
                             .slideDown(200);
 
                         setTimeout(function () {
-                            console.log("rd")
+                            console.log("rd");
                             window.location.href = baseurl + "/doanvien";
                         }, 700);
                     }
@@ -688,7 +688,7 @@ App.DoanVien = (function () {
             App.Site.showAjaxLoading();
             dangXuLy = true;
             $.ajax({
-                url:`${baseurl}/api/doanvien/${maDV}`,
+                url: `${baseurl}/api/doanvien/${maDV}`,
                 type: "DELETE",
                 dataType: "json",
                 success: function (res) {
@@ -746,13 +746,10 @@ App.DoanPhi = (function () {
             // });
 
             $.ajax({
-                url: baseurl + "/doanphi/data",
-                type: "POST",
-                data: { MACD: maCD },
+                url: `${baseurl}/api/doanphi/${maCD}`,
+                type: "GET",
                 dataType: "json",
                 success: function (html) {
-                    // why the fuck did server return html??? is it server's responsibility ???
-                    console.log(html);
                     App.Site.hideAjaxLoading();
                     dangXuLy = false;
 
@@ -786,9 +783,8 @@ App.DoanPhi = (function () {
             });
 
             $.ajax({
-                url: baseurl + "/doanphi/entry",
+                url: `${baseurl}/api/doanphi`,
                 type: "POST",
-                // data: { MADV: maDV, DOANPHI: val },
                 data: data,
                 dataType: "json",
                 success: function (res) {
@@ -870,9 +866,8 @@ App.RenLuyen = (function () {
             var hocky = $("#selectHocKy").val();
 
             $.ajax({
-                url: baseurl + "/renluyen/data",
-                type: "POST",
-                data: { MaCD: maCD, HocKy: hocky },
+                url: `${baseurl}/api/renluyen/${maCD}/${hocky}`,
+                type: "GET",
                 dataType: "json",
                 success: function (response) {
                     App.Site.hideAjaxLoading();
@@ -880,6 +875,55 @@ App.RenLuyen = (function () {
                     $("#tblRenLuyen").html(response.data).slideDown(200);
 
                     App.Site.init();
+                },
+            });
+        }
+    };
+
+    var TaoMoi = function (maDV) {
+        if (dangXuLy == false) {
+            $("#btnLuu_" + maDV)
+                .removeClass("btn-warning")
+                .addClass("btn-link")
+                .html("waiting...")
+                .attr("disabled", "disabled");
+            dangXuLy = true;
+            var diem = $('input[name="Diem_' + maDV + '"]').val();
+            var xeploai = $('select[name="XepLoai_' + maDV + '"]').val();
+            var hocky = $("#selectHocKy").val();
+            var data = {
+                MaDV: maDV,
+                HocKy: `HK${hocky}`,
+                Diem: diem,
+                XepLoai: xeploai,
+            };
+            $.ajax({
+                url: `${baseurl}/api/renluyen`,
+                type: "POST",
+                data: data,
+                dataType: "json",
+                success: function (res) {
+                    console.log(res);
+                    dangXuLy = false;
+                    $("#btnLuu_" + maDV)
+                        .addClass("text-success")
+                        .html('<i class="fa fa-check"></i> Xong')
+                        .fadeIn(200);
+                    setTimeout(function () {
+                        $("#btnLuu_" + maDV)
+                            .addClass("btn-warning")
+                            .removeClass("btn-link")
+                            .html('<i class="fa fa-save"></i> Lưu')
+                            .removeAttr("disabled")
+                            .show(500);
+                    }, 500);
+                },
+                error: function (err) {},
+                statusCode: {
+                    // Resource already created, update
+                    201: function () {
+                        CapNhat(maDV);
+                    },
                 },
             });
         }
@@ -903,11 +947,12 @@ App.RenLuyen = (function () {
                 XepLoai: xeploai,
             };
             $.ajax({
-                url: baseurl + "/renluyen/entry",
-                type: "POST",
+                url: `${baseurl}/api/renluyen`,
+                type: "PUT",
                 data: data,
                 dataType: "json",
                 success: function (res) {
+                    console.log(res);
                     dangXuLy = false;
                     $("#btnLuu_" + maDV)
                         .addClass("text-success")
@@ -951,29 +996,56 @@ App.RenLuyen = (function () {
                 Diem: diem,
                 XepLoai: xeploai,
             };
-            console.log(data);
-            $.ajax({
-                url: baseurl + "/renluyen/entryBulk",
-                type: "POST",
-                data: data,
-                dataType: "json",
-                success: function (res) {
-                    dangXuLy = false;
+
+            var promises = [];
+
+            list_maDV.forEach((maDV) => {
+                var data = {
+                    MaDV: maDV,
+                    HocKy: `HK${hocky}`,
+                    Diem: diem,
+                    XepLoai: xeploai,
+                };
+                promises.push(
+                    $.ajax({
+                        url: `${baseurl}/api/renluyen`,
+                        type: "POST",
+                        data: data,
+                        dataType: "json",
+                        error: function (err) {},
+                        statusCode: {
+                            // Resource already created, update
+                            201: function () {
+                                promises.push(
+                                    $.ajax({
+                                        url: `${baseurl}/api/renluyen`,
+                                        type: "PUT",
+                                        data: data,
+                                        dataType: "json",
+                                        error: function (err) {},
+                                    })
+                                );
+                            },
+                        },
+                    })
+                );
+            });
+
+            Promise.all(promises).then(() => {
+                dangXuLy = false;
+                $("#btnLuu_all")
+                    .addClass("text-success")
+                    .html('<i class="fa fa-check"></i> Xong')
+                    .fadeIn(200);
+                setTimeout(function () {
                     $("#btnLuu_all")
-                        .addClass("text-success")
-                        .html('<i class="fa fa-check"></i> Xong')
-                        .fadeIn(200);
-                    setTimeout(function () {
-                        $("#btnLuu_all")
-                            .addClass("btn-warning")
-                            .removeClass("btn-link")
-                            .html('<i class="fa fa-save"></i> Lưu')
-                            .removeAttr("disabled")
-                            .show(500);
-                    }, 500);
-                    App.RenLuyen.XemRenLuyen();
-                },
-                error: function (err) {},
+                        .addClass("btn-warning")
+                        .removeClass("btn-link")
+                        .html('<i class="fa fa-save"></i> Lưu')
+                        .removeAttr("disabled")
+                        .show(500);
+                }, 500);
+                App.RenLuyen.XemRenLuyen();
             });
         }
     };
@@ -981,6 +1053,7 @@ App.RenLuyen = (function () {
     return {
         XemRenLuyen: XemRenLuyen,
         CapNhat: CapNhat,
+        TaoMoi: TaoMoi,
         CapNhatAll: CapNhatAll,
     };
 })();

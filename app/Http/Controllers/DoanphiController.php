@@ -56,12 +56,9 @@ class DoanphiController extends BaseController
             ->select('doanphi.*', 'doanvien.MaDV', 'doanvien.HoDV', 'doanvien.TenDV')
             ->get();
 
-
-
-
         $html = view('tbl-doanphi', ['listDP' => json_encode(json_decode(json_encode($data)))])->render();
 
-        return $this->sendResponse($html, "lamo");
+        return $this->sendResponse($html, "OK");
     }
 
     // Update (or create new Entry) of doan phi

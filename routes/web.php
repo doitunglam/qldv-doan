@@ -32,19 +32,12 @@ Route::middleware('auth:sanctum')->group(function () {
     })->name('index');
 
     Route::get('/doanphi', [DoanphiController::class, 'view']);
-    Route::post('/doanphi/data', [DoanphiController::class, 'getData']);
-    Route::post('/doanphi/entry', [DoanphiController::class, 'update']);
-
-
 
     Route::get('/doanvien', [DoanvienController::class, 'view']);
     Route::get('/doanvien/sua', [DoanvienController::class, 'viewUpdate']);
     Route::get('/doanvien/xoa', [DoanvienController::class, 'viewDelete']);
 
     Route::get('/renluyen', [RenluyenController::class, 'view']);
-    Route::post('/renluyen/data', [RenluyenController::class, 'getData']);
-    Route::post('/renluyen/entry', [RenluyenController::class, 'update']);
-    Route::post('/renluyen/entryBulk', [RenluyenController::class, 'updateBulk']);
 
     Route::resource('lich', LichController::class);
 });

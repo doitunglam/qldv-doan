@@ -97,7 +97,7 @@
                 </td>
                 <td class="text-center">
                     <button id="btnLuu_<?php echo $dv['MaDV']; ?>" type="button" class="btn btn-warning btn-flat btn-sm"
-                        onclick="App.RenLuyen.CapNhat('<?php echo $dv['MaDV']; ?>'); return false;"><i class="fa fa-save"></i>
+                        onclick="App.RenLuyen.TaoMoi('<?php echo $dv['MaDV']; ?>'); return false;"><i class="fa fa-save"></i>
                         Lưu</button>
                 </td>
             </tr>

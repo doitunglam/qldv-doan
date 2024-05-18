@@ -6,6 +6,7 @@ use App\Models\Doanphi;
 use \Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Validator;
+use DB;
 use App\Http\Controllers\API\BaseController as BaseController;
 
 
@@ -17,14 +18,28 @@ class DoanphiController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        if (\Auth::user()->cannot('viewAny', Doanphi::class)) {
-            return $this->sendResponse(null, 'Khong du quyen!');
+        // must go to repository pattern, but I'm too tired to do it
+        $input = $request->all();
+        $validator = Validator::make($input, [
+            "MACD" => "required|string"
+        ]);
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
         }
-        $doanphi = Doanphi::all();
-        return $this->sendResponse($doanphi, 'Lay danh sach doan phi thanh cong!');
 
+        $macd = (int) $input['MACD'];
+
+        $data = DB::table('doanvien')
+            ->leftJoin('doanphi', 'doanvien.MaDV', '=', 'doanphi.MaDV')
+            ->where('MaCD', '=', "$macd")
+            ->select('doanphi.*', 'doanvien.MaDV', 'doanvien.HoDV', 'doanvien.TenDV')
+            ->get();
+
+        $html = view('tbl-doanphi', ['listDP' => json_encode(json_decode(json_encode($data)))])->render();
+
+        return $this->sendResponse($html, "OK");
     }
 
     /**
@@ -45,32 +60,24 @@ class DoanphiController extends BaseController
      */
     public function store(Request $request)
     {
-        //
-        if (\Auth::user()->cannot('create', Doanphi::class)) {
-            return $this->sendResponse(null, 'Khong du quyen!');
-        }
         $input = $request->all();
 
-        $validator = Validator::make($input, [
-            'MaDV' => 'required',
-            'HK1' => 'required',
-            'HK2' => 'required',
-            'HK3' => 'required',
-            'HK4' => 'required',
-            'HK5' => 'required',
-            'HK6' => 'required',
-            'HK7' => 'required',
-            'HK8' => 'required'
-        ]);
+        $maDV = $input['MaDV'];
 
-        if ($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors());
+        $doanphi = Doanphi::where("MaDV", $maDV)->first();
+
+        if (isset($doanphi)) {
+            unset($input['MaDV']);
+            foreach ($input as $key => $value) {
+                $doanphi[$key] = $value;
+            }
+
+            $doanphi->save();
+        } else {
+            $doanphi = Doanphi::create($input);
         }
 
-        $doanphi = Doanphi::create($input);
-
-        return $this->sendResponse($doanphi, 'Tao doan phi thanh cong.');
-
+        return $this->sendResponse($input, "Luu doan phi thanh cong!");
     }
 
     /**
@@ -79,18 +86,17 @@ class DoanphiController extends BaseController
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($maCD)
     {
-        $doanphi = Doanphi::find($id);
-        if (is_null($doanphi)) {
-            return $this->sendError('Khong tim thay doan phi.');
-        }
+        $data = DB::table('doanvien')
+            ->leftJoin('doanphi', 'doanvien.MaDV', '=', 'doanphi.MaDV')
+            ->where('MaCD', '=', "$maCD")
+            ->select('doanphi.*', 'doanvien.MaDV', 'doanvien.HoDV', 'doanvien.TenDV')
+            ->get();
 
-        if (\Auth::user()->cannot('view', $doanphi)) {
-            return $this->sendResponse(null, 'Khong du quyen!');
-        }
+        $html = view('tbl-doanphi', ['listDP' => json_encode(json_decode(json_encode($data)))])->render();
 
-        return $this->sendResponse(new Response($doanphi), 'Hien thi doan phi thanh cong.');
+        return $this->sendResponse($html, "OK");
     }
 
     /**
