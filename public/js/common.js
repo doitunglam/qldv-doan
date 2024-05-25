@@ -746,7 +746,7 @@ App.DoanPhi = (function () {
             // });
 
             $.ajax({
-                url: `${baseurl}/api/doanphi/${maCD}`,
+                url: `${baseurl}/api/doanphi/view/${maCD}`,
                 type: "GET",
                 dataType: "json",
                 success: function (html) {
@@ -866,7 +866,7 @@ App.RenLuyen = (function () {
             var hocky = $("#selectHocKy").val();
 
             $.ajax({
-                url: `${baseurl}/api/renluyen/${maCD}/${hocky}`,
+                url: `${baseurl}/api/renluyen/view/${maCD}/${hocky}`,
                 type: "GET",
                 dataType: "json",
                 success: function (response) {

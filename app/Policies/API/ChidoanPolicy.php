@@ -21,7 +21,7 @@ class ChidoanPolicy
     public function viewAny(User $user)
     {
         //
-        return $user->Quyen === 1;
+        return $user->Quyen === 10;
 
     }
 
@@ -57,7 +57,7 @@ class ChidoanPolicy
     public function create(User $user)
     {
         //
-        return $user->Quyen === 1;
+        return $user->Quyen === 10;
 
     }
 
@@ -71,7 +71,7 @@ class ChidoanPolicy
     public function update(User $user, Chidoan $chidoan)
     {
         //
-        return $user->Quyen === 1;
+        return $user->Quyen === 10;
 
     }
 
@@ -85,7 +85,7 @@ class ChidoanPolicy
     public function delete(User $user, Chidoan $chidoan)
     {
         //
-        return $user->Quyen === 1;
+        return $user->Quyen === 10;
 
     }
 
@@ -99,7 +99,7 @@ class ChidoanPolicy
     public function restore(User $user, Chidoan $chidoan)
     {
         //
-        return $user->Quyen === 1;
+        return $user->Quyen === 10;
 
     }
 
@@ -113,7 +113,7 @@ class ChidoanPolicy
     public function forceDelete(User $user, Chidoan $chidoan)
     {
         //
-        return $user->Quyen === 1;
+        return $user->Quyen === 10;
 
     }
 }

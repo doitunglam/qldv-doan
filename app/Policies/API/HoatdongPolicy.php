@@ -19,7 +19,7 @@ class HoatdongPolicy
     public function viewAny(User $user)
     {
         //
-        return $user->Quyen === 1 ;
+        return $user->Quyen === 10 ;
 
     }
 
@@ -33,7 +33,7 @@ class HoatdongPolicy
     public function view(User $user, Hoatdong $hoatdong)
     {
         //
-        return $user->Quyen === 1 ;
+        return $user->Quyen === 10 ;
 
     }
 
@@ -46,7 +46,7 @@ class HoatdongPolicy
     public function create(User $user)
     {
         //
-        return $user->Quyen === 1 ;
+        return $user->Quyen === 10 ;
 
     }
 
@@ -60,7 +60,7 @@ class HoatdongPolicy
     public function update(User $user, Hoatdong $hoatdong)
     {
         //
-        return $user->Quyen === 1 ;
+        return $user->Quyen === 10 ;
 
     }
 
@@ -74,7 +74,7 @@ class HoatdongPolicy
     public function delete(User $user, Hoatdong $hoatdong)
     {
         //
-        return $user->Quyen === 1 ;
+        return $user->Quyen === 10 ;
     }
 
     /**
@@ -87,7 +87,7 @@ class HoatdongPolicy
     public function restore(User $user, Hoatdong $hoatdong)
     {
         //
-        return $user->Quyen === 1 ;
+        return $user->Quyen === 10 ;
     }
 
     /**
@@ -100,6 +100,6 @@ class HoatdongPolicy
     public function forceDelete(User $user, Hoatdong $hoatdong)
     {
         //
-        return $user->Quyen === 1 ;
+        return $user->Quyen === 10 ;
     }
 }

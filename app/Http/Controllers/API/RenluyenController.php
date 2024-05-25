@@ -108,6 +108,28 @@ class RenluyenController extends BaseController
             ->select('ren_luyen.*', 'doanvien.MaDV', 'doanvien.HoDV', 'doanvien.TenDV')
             ->get();
 
+        return $this->sendResponse($data, "OK");
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param int $maCD
+     * @param int $hocKy
+     * @return \Illuminate\Http\Response
+     */
+    public function showView($maCD, $hocKy)
+    {
+        $renluyen = DB::table('renluyen')->where('HocKy', '=', "HK$hocKy");
+
+        $data = DB::table('doanvien')
+            ->leftJoinSub($renluyen, 'ren_luyen', function ($join) {
+                $join->on('doanvien.MaDV', '=', 'ren_luyen.MaDV');
+            })
+            ->where("MaCD", "=", "$maCD")
+            ->select('ren_luyen.*', 'doanvien.MaDV', 'doanvien.HoDV', 'doanvien.TenDV')
+            ->get();
+
         $html = view('tbl-renluyen', ['listRL' => json_encode($data)])->render();
 
         return $this->sendResponse($html, "OK");

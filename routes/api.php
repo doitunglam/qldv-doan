@@ -29,12 +29,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('doanvien', DoanvienController::class);
 
     Route::get('renluyen/{MaCD}/{HocKy}', [RenluyenController::class, 'show']);
+    Route::get('renluyen/view/{MaCD}/{HocKy}', [RenluyenController::class, 'showView']);
     Route::post('renluyen', [RenluyenController::class, 'store']);
     Route::put('renluyen', [RenluyenController::class, 'update']);
 
     Route::resource('chidoan', ChidoanController::class);
     Route::resource('chucvu', ChucvuController::class);
     Route::resource('doanphi', DoanphiController::class);
+    Route::get('doanphi/view/{MaCD}', [DoanphiController::class, 'showView']);
     Route::resource('hoatdong', HoatdongController::class);
     Route::resource('khoa', KhoaController::class);
 

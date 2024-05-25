@@ -37,9 +37,13 @@ class DoanphiController extends BaseController
             ->select('doanphi.*', 'doanvien.MaDV', 'doanvien.HoDV', 'doanvien.TenDV')
             ->get();
 
-        $html = view('tbl-doanphi', ['listDP' => json_encode(json_decode(json_encode($data)))])->render();
+        // ĐÚng thì data ở đây
+        return $this->sendResponse($data, "Hien doan phi thanh cong!");
 
-        return $this->sendResponse($html, "OK");
+
+        // $html = view('tbl-doanphi', ['listDP' => json_encode(json_decode(json_encode($data)))])->render();
+
+        // return $this->sendResponse($html, "OK");
     }
 
     /**
@@ -87,6 +91,23 @@ class DoanphiController extends BaseController
      * @return \Illuminate\Http\Response
      */
     public function show($maCD)
+    {
+        $data = DB::table('doanvien')
+            ->leftJoin('doanphi', 'doanvien.MaDV', '=', 'doanphi.MaDV')
+            ->where('MaCD', '=', "$maCD")
+            ->select('doanphi.*', 'doanvien.MaDV', 'doanvien.HoDV', 'doanvien.TenDV')
+            ->get();
+
+        return $this->sendResponse($data, "Hien doan phi thanh cong!");
+    }
+
+        /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showView($maCD)
     {
         $data = DB::table('doanvien')
             ->leftJoin('doanphi', 'doanvien.MaDV', '=', 'doanphi.MaDV')
