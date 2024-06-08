@@ -7,6 +7,7 @@ use App\Http\Controllers\API\DoanvienController;
 use App\Http\Controllers\API\HoatdongController;
 use App\Http\Controllers\API\KhoaController;
 use App\Http\Controllers\API\RenluyenController;
+use App\Http\Controllers\API\ThongBaoController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\RegisterController;
@@ -39,5 +40,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('doanphi/view/{MaCD}', [DoanphiController::class, 'showView']);
     Route::resource('hoatdong', HoatdongController::class);
     Route::resource('khoa', KhoaController::class);
+
+    Route::resource('thongbao', ThongBaoController::class);
 
 });

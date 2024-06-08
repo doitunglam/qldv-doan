@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2024 at 06:09 AM
+-- Generation Time: Jun 08, 2024 at 08:23 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -90,7 +90,6 @@ CREATE TABLE `doanphi` (
 --
 
 INSERT INTO `doanphi` (`MaDV`, `HK1`, `HK2`, `HK3`, `HK4`, `HK5`, `HK6`, `HK7`, `HK8`) VALUES
-('61112345', 0, 1, 0, 1, 1, 0, 1, 0),
 ('61112346', 1, 0, 1, 0, 0, 1, 0, 0),
 ('61164235', 0, 0, 0, 0, 0, 0, 0, 0),
 ('61164236', 1, 0, 0, 0, 0, 0, 0, 0),
@@ -120,6 +119,7 @@ CREATE TABLE `doanvien` (
 --
 
 INSERT INTO `doanvien` (`MaDV`, `HoDV`, `TenDV`, `GioiTinh`, `NgaySinh`, `Email`, `SDT`, `QueQuan`, `MaCD`, `NgayVaoDoan`) VALUES
+('61112344', '1', '1', 1, '2024-05-25', 'doitunglam1@gmail.com', '1', '1', '1', '2024-05-25'),
 ('61112345', 'Phạm Hữu', 'Danh', 1, '2001-02-13', 'vietnam65241@gmail.com', '0314252242', 'Khánh Hòa', '1', '2023-09-05'),
 ('61112346', 'Huỳnh Quốc', 'Đạt', 1, '2001-02-23', 'vietnam65242@gmail.com', '0314252242', 'Phú Yên', '1', '2023-06-13'),
 ('61112347', 'Lê Thị', 'Hiền', 0, '2001-02-03', 'vietnam65232@gmail.com', '0314252246', 'Khánh Hòa', '1', '2023-09-05'),
@@ -247,7 +247,8 @@ CREATE TABLE `lich` (
 --
 
 INSERT INTO `lich` (`MaLich`, `MaCD`, `HocKy`, `ThoiDiem`, `TrangThai`) VALUES
-(10, '5', 'HK1', '2024-04-18', NULL);
+(10, '5', 'HK1', '2024-04-18', NULL),
+(11, '1', 'HK1', '2024-06-08', NULL);
 
 -- --------------------------------------------------------
 
@@ -341,7 +342,15 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (18, 'App\\Models\\User', 5, 'MyApp', '56588a68b3043f0405c4a0fe85e7ff30de8bf9823e4e674af77a242e6ebb256f', '[\"*\"]', '2023-06-13 05:06:08', NULL, '2023-06-12 23:07:07', '2023-06-13 05:06:08'),
 (19, 'App\\Models\\User', 5, 'MyApp', '67afd6ab93cafa62a9cb89b91f17033f1854c8f74d865752f648a6ca364be584', '[\"*\"]', NULL, NULL, '2023-06-12 23:15:14', '2023-06-12 23:15:14'),
 (20, 'App\\Models\\User', 1, 'MyApp', '3c31ba6880a32f44cb13b5239193261e296b88aa990fe4ebf8b741e91b294dff', '[\"*\"]', '2023-06-13 01:44:17', NULL, '2023-06-13 01:37:21', '2023-06-13 01:44:17'),
-(21, 'App\\Models\\User', 1, 'MyApp', '422786389a8ad99aef188f8c62a9f5a70b150e42f9ce99d765b533f9e525c4f6', '[\"*\"]', NULL, NULL, '2023-06-13 04:05:53', '2023-06-13 04:05:53');
+(21, 'App\\Models\\User', 1, 'MyApp', '422786389a8ad99aef188f8c62a9f5a70b150e42f9ce99d765b533f9e525c4f6', '[\"*\"]', NULL, NULL, '2023-06-13 04:05:53', '2023-06-13 04:05:53'),
+(22, 'App\\Models\\User', 10, 'MyApp', 'd43ef2228f8a2de6288de78a0d043513d7648f9f782a7e2b786d22e4aab61b82', '[\"*\"]', '2024-05-18 02:55:49', NULL, '2024-05-18 01:53:56', '2024-05-18 02:55:49'),
+(23, 'App\\Models\\User', 10, 'MyApp', '7eafb3f1305e49fa94d9a901b8c04defc8be0cb475bec4d79b6a2e2b03967c77', '[\"*\"]', '2024-05-18 04:05:16', NULL, '2024-05-18 02:56:25', '2024-05-18 04:05:16'),
+(24, 'App\\Models\\User', 10, 'MyApp', 'ac944c0ff928453f33464d6d17651d25949b9393edf7314cbbf2ce9baa168d53', '[\"*\"]', '2024-05-25 02:29:34', NULL, '2024-05-25 01:52:38', '2024-05-25 02:29:34'),
+(25, 'App\\Models\\User', 10, 'MyApp', 'f7d869b6131d2b97448b1565df3b2ab89bce424bfb086460276845ab63690042', '[\"*\"]', '2024-05-25 02:25:04', NULL, '2024-05-25 02:24:12', '2024-05-25 02:25:04'),
+(26, 'App\\Models\\User', 10, 'MyApp', '0d954dce67ccf3c89ce62f79563e3de23b31f9af704e66e0f53fac86b63c9036', '[\"*\"]', NULL, NULL, '2024-05-25 02:27:15', '2024-05-25 02:27:15'),
+(27, 'App\\Models\\User', 10, 'MyApp', '539934824cbcb767d1ac15fb42bcfce7cdd2693c35cea00a484faef592da7ba7', '[\"*\"]', '2024-05-25 02:33:05', NULL, '2024-05-25 02:31:34', '2024-05-25 02:33:05'),
+(28, 'App\\Models\\User', 10, 'MyApp', '55b5e2b8e0d70673c79780ebf0b5126d2a2ac42ae7efe8808b6d102523cc611a', '[\"*\"]', '2024-06-07 19:23:13', NULL, '2024-06-07 19:22:37', '2024-06-07 19:23:13'),
+(29, 'App\\Models\\User', 10, 'MyApp', '7a60d0ae4a241505cb8d31704d9ed96d476bfef5d26bd36e6689d9def2b233d1', '[\"*\"]', '2024-06-07 23:22:51', NULL, '2024-06-07 19:48:01', '2024-06-07 23:22:51');
 
 -- --------------------------------------------------------
 
@@ -361,14 +370,14 @@ CREATE TABLE `renluyen` (
 --
 
 INSERT INTO `renluyen` (`MaDV`, `HocKy`, `Diem`, `XepLoai`) VALUES
-('61112345', 'HK1', 77, 'Khá'),
-('61112346', 'HK1', 77, 'Khá'),
-('61112347', 'HK1', 0, 'Trung bình'),
-('61112348', 'HK1', 0, 'Trung bình'),
-('61136483', 'HK1', 77, 'Khá'),
-('61136484', 'HK1', 77, 'Khá'),
-('61136485', 'HK1', 77, 'Khá'),
-('61136487', 'HK1', 77, 'Khá'),
+('61112345', 'HK1', 33, 'Xuất sắc'),
+('61112346', 'HK1', 30, 'Trung bình'),
+('61112347', 'HK1', 30, 'Trung bình'),
+('61112348', 'HK1', 30, 'Trung bình'),
+('61136483', 'HK1', 30, 'Trung bình'),
+('61136484', 'HK1', 30, 'Trung bình'),
+('61136485', 'HK1', 30, 'Trung bình'),
+('61136487', 'HK1', 30, 'Trung bình'),
 ('61164237', 'HK1', 100, 'Xuất sắc'),
 ('61164237', 'HK2', 100, 'Xuất sắc'),
 ('61164237', 'HK3', 100, 'Khá'),
@@ -435,6 +444,29 @@ INSERT INTO `taikhoan` (`id`, `name`, `email`, `email_verified_at`, `password`, 
 (5, 'admin2222222', 'admin111@admin.com', NULL, '$2y$10$.eX2qd4xKmUT2M1quyvC1OdXizpDgbIfZEzJ0jbSPpG4btGtMSfB6', NULL, '2023-06-12 20:11:14', '2023-06-12 20:11:14', 10),
 (8, 'huynguyen71101@gmail.com', 'huynguyen71101@gmail.com', NULL, '$2y$10$nCAXphEccoxHpHvXZOjpM.BKk0oUgpGMz83EGgCRLkQSFgQDSYUyy', NULL, '2023-06-16 09:04:02', '2023-06-16 09:04:02', 0),
 (10, 'doitunglam1@gmail.com', 'doitunglam1@gmail.com', NULL, '$2y$10$vZmONVgzGb323mqO0zdb..TX1esdRCwh3voaIon1Uxd7h6mVahv/W', NULL, '2024-05-12 21:07:29', '2024-05-12 21:07:29', 10);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `thongbao`
+--
+
+CREATE TABLE `thongbao` (
+  `MaTB` int(11) NOT NULL,
+  `MaDV` int(11) NOT NULL,
+  `Khoa` int(11) NOT NULL,
+  `NoiDung` mediumtext NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `thongbao`
+--
+
+INSERT INTO `thongbao` (`MaTB`, `MaDV`, `Khoa`, `NoiDung`, `created_at`, `updated_at`) VALUES
+(1, 61112344, 61, 'Admin Test', '2024-06-07 22:36:12', '2024-06-07 22:36:12'),
+(2, 61112344, 61, 'Xin chao tất cả mọi ngườiiiiiiiiiiiiiiiiiiiii', '2024-06-07 23:22:51', '2024-06-07 23:22:51');
 
 --
 -- Indexes for dumped tables
@@ -559,6 +591,13 @@ ALTER TABLE `taikhoan`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
+-- Indexes for table `thongbao`
+--
+ALTER TABLE `thongbao`
+  ADD PRIMARY KEY (`MaTB`),
+  ADD KEY `MaDV` (`MaDV`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -572,7 +611,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `lich`
 --
 ALTER TABLE `lich`
-  MODIFY `MaLich` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `MaLich` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -584,13 +623,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `taikhoan`
 --
 ALTER TABLE `taikhoan`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `thongbao`
+--
+ALTER TABLE `thongbao`
+  MODIFY `MaTB` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

@@ -1091,3 +1091,135 @@ App.ThongKe = (function () {
         XemThongKe: XemThongKe,
     };
 })();
+
+App.ThongBao = (function () {
+    var dangXuLy = false;
+
+    var ThemTB = function () {
+        if (dangXuLy == false) {
+            App.Site.showAjaxLoading();
+            dangXuLy = true;
+            var frmData = $("#frmThemTB").serialize();
+
+            App.Site.hideAjaxLoading();
+
+            $.ajax({
+                url: baseurl + "/api/thongbao",
+                type: "POST",
+                data: frmData,
+                dataType: "json",
+                success: function (res) {
+                    App.Site.hideAjaxLoading();
+                    res = res.data;
+                    dangXuLy = false;
+                    if (res.status == false) {
+                        $("#errThemTB")
+                            .removeClass("text-success")
+                            .addClass("text-danger")
+                            .html(res.message)
+                            .slideDown(200);
+
+                        setTimeout(function () {
+                            $("#errThemTB").slideUp(200);
+                        }, 3000);
+                    } else {
+                        $("#errThemTB")
+                            .removeClass("text-danger")
+                            .addClass("text-success")
+                            .html(res.message)
+                            .slideDown(200);
+
+                        setTimeout(function () {
+                            location.reload();
+                        }, 700);
+                    }
+                },
+            });
+        }
+    };
+
+    var SuaDV = function () {
+        if (dangXuLy == false) {
+            App.Site.showAjaxLoading();
+            dangXuLy = true;
+            var frmData = $("#frmSuaDV").serialize();
+            const maDV = $("[name='MaDV']").attr("value");
+            $.ajax({
+                url: `${baseurl}/api/doanvien/${maDV}`,
+                type: "PUT",
+                data: frmData,
+                dataType: "json",
+                success: function (res) {
+                    App.Site.hideAjaxLoading();
+                    dangXuLy = false;
+                    if (res.status == false) {
+                        $("#errSuaDV")
+                            .removeClass("text-success")
+                            .addClass("text-danger")
+                            .html(res.message)
+                            .slideDown(200);
+
+                        setTimeout(function () {
+                            $("#errSuaDV").slideUp(200);
+                        }, 3000);
+                    } else {
+                        $("#errSuaDV")
+                            .removeClass("text-danger")
+                            .addClass("text-success")
+                            .html(res.message)
+                            .slideDown(200);
+
+                        setTimeout(function () {
+                            console.log("rd");
+                            window.location.href = baseurl + "/doanvien";
+                        }, 700);
+                    }
+                },
+            });
+        }
+    };
+
+    var XoaDV = function (maDV) {
+        if (dangXuLy == false) {
+            App.Site.showAjaxLoading();
+            dangXuLy = true;
+            $.ajax({
+                url: `${baseurl}/api/doanvien/${maDV}`,
+                type: "DELETE",
+                dataType: "json",
+                success: function (res) {
+                    res = res.data;
+                    App.Site.hideAjaxLoading();
+                    dangXuLy = false;
+                    if (res.status == false) {
+                        $("#errXoaDV")
+                            .removeClass("text-success")
+                            .addClass("text-danger")
+                            .html(res.message)
+                            .slideDown(200);
+
+                        setTimeout(function () {
+                            $("#errXoaDV").slideUp(200);
+                        }, 3000);
+                    } else {
+                        $("#errXoaDV")
+                            .removeClass("text-danger")
+                            .addClass("text-success")
+                            .html(res.message)
+                            .slideDown(200);
+
+                        setTimeout(function () {
+                            window.location.href = baseurl + "/doanvien";
+                        }, 700);
+                    }
+                },
+            });
+        }
+    };
+
+    return {
+        ThemTB: ThemTB,
+        SuaDV: SuaDV,
+        XoaDV: XoaDV,
+    };
+})();

@@ -10,7 +10,11 @@
                     <i class="fa fa-dashboard"></i> <span>Trang chủ</span>
                 </a>
             </li>
-
+            <li class="treeview <?php echo isset($sb_page) && $sb_page == 'thongbao' ? 'active' : ''; ?>">
+                <a href="<?php echo url('thongbao'); ?>">
+                    <i class="fa fa-bell"></i> <span>Thông báo</span>
+                </a>
+            </li>
             <li class="treeview <?php echo isset($sb_page) && $sb_page == 'doanvien' ? 'active' : ''; ?>">
                 <a href="<?php echo url('doanvien'); ?>">
                     <i class="fa fa-users"></i> <span>Đoàn viên</span>
