@@ -6,14 +6,14 @@
             </div>
             <!-- Main content -->
             <div class="box-body">
-                @if (\Auth::user()->Quyen == 10)
+                @can('create', App\Models\Thongbao::class)
                     <div class="row">
                         <div class="col-xs-12">
                             <button type="button" class="btn btn-success btn-flat" data-toggle="modal"
                                 data-target="#modalThemDV"><i class="fa fa-plus"></i> Thêm mới</button>
                         </div>
                     </div>
-                @endif
+                @endcan
                 <div class="row">
                     <div class="col-xs-2 text-bold"> Nguời gửi </div>
                     <div class="col-xs-8 text-bold"> Nội dung </div>

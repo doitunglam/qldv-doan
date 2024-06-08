@@ -9,6 +9,7 @@ use App\Models\Doanvien;
 use App\Models\Hoatdong;
 use App\Models\Khoa;
 use App\Models\Renluyen;
+use App\Models\Thongbao;
 use App\Policies\API\ChidoanPolicy;
 use App\Policies\API\ChucvuPolicy;
 use App\Policies\API\DoanphiPolicy;
@@ -16,6 +17,7 @@ use App\Policies\API\DoanvienPolicy;
 use App\Policies\API\HoatdongPolicy;
 use App\Policies\API\KhoaPolicy;
 use App\Policies\API\RenluyenPolicy;
+use App\Policies\API\ThongbaoPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -33,7 +35,9 @@ class AuthServiceProvider extends ServiceProvider
         Doanphi::class => DoanphiPolicy::class,
         Hoatdong::class => HoatdongPolicy::class,
         Renluyen::class => RenluyenPolicy::class,
-        Khoa::class => KhoaPolicy::class
+        Khoa::class => KhoaPolicy::class,
+        Thongbao::class => ThongbaoPolicy::class
+
     ];
 
     /**
