@@ -21,11 +21,11 @@
                 </a>
             </li>
 
-            <li class="treeview <?php echo isset($sb_page) && $sb_page == 'chidoan' ? 'active' : ''; ?>">
+            {{-- <li class="treeview <?php echo isset($sb_page) && $sb_page == 'chidoan' ? 'active' : ''; ?>">
                 <a href="<?php echo url('chidoan'); ?>">
                     <i class="fa fa-building"></i> <span>Chi đoàn</span>
                 </a>
-            </li>
+            </li> --}}
             {{-- <?php if ($this->session->userdata('QUYEN') >= 1): ?>
             <li class="treeview <?php echo isset($sb_page) && $sb_page == 'doancs' ? 'active' : ''; ?>">
                 <a href="<?php echo url('doancs'); ?>">
@@ -43,11 +43,11 @@
                     <i class="fa fa-money"></i> <span>Đoàn phí</span>
                 </a>
             </li>
-            <li class="treeview <?php echo isset($sb_page) && $sb_page == 'thongke' ? 'active' : ''; ?>">
+            {{-- <li class="treeview <?php echo isset($sb_page) && $sb_page == 'thongke' ? 'active' : ''; ?>">
                 <a href="<?php echo url('thongke'); ?>">
                     <i class="fa fa-bar-chart"></i> <span>Thống kê</span>
                 </a>
-            </li>
+            </li> --}}
             {{-- <?php if ($this->session->userdata('QUYEN') >= 2): ?>
             <li class="treeview <?php echo isset($sb_page) && $sb_page == 'taikhoan' ? 'active' : ''; ?>">
                 <a href="<?php echo url('taikhoan'); ?>">

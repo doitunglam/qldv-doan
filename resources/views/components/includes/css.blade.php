@@ -1,4 +1,4 @@
-<link rel="shortcut icon" href="<?php echo url('/'); ?>/img/favicon.ico">
+<link rel="shortcut icon" href="<?php echo url('/'); ?>/img/logo-doan.webp">
 
 <link rel="stylesheet" href="<?php echo url('/'); ?>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<?php echo url('/'); ?>/css/font-awesome.min.css">

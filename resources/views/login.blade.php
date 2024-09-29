@@ -15,7 +15,7 @@
     <div class="login-box" style="margin: 5% auto; margin-left: 58%;">
         <div class="login-logo">
             <a href="{{ url('/') }}">
-                <img src="{{ asset('img/logo-tcu.png') }}" alt="" style="display: block;width: 80px;margin: 5px auto;"><b>QUẢN LÝ ĐOÀN VIÊN</b></a>
+                <img src="{{ asset('img/logo-doan.webp') }}" alt="" style="display: block;width: 80px;margin: 5px auto;"><b>QUẢN LÝ ĐOÀN VIÊN</b></a>
         </div>
         <div class="login-box-body">
             <p class="login-box-msg">

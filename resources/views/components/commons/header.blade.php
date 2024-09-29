@@ -1,7 +1,7 @@
 <header class="main-header">
 	<a title="Trang chủ" href="<?php echo url('/'); ?>" class="logo">
-		<span class="logo-mini"><img src="<?php echo url('/'); ?>/img/logo-tcu-small.png" alt="Logo Đoàn" height="40px"></span>
-		<span class="logo-lg"><img src="<?php echo url('/'); ?>/img/logo-tcu-small.png" alt="Logo Đoàn" height="40px"> -  QLĐV</span>
+		<span class="logo-mini"><img src="<?php echo url('/'); ?>/img/logo-doan.webp" alt="Logo Đoàn" height="40px"></span>
+		<span class="logo-lg"><img src="<?php echo url('/'); ?>/img/logo-doan.webp" alt="Logo Đoàn" height="40px"> -  QLĐV</span>
 	</a>
 
 	<nav class="navbar navbar-static-top">
